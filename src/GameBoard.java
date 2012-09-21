@@ -11,24 +11,25 @@ public class GameBoard {
 	private static int[][] playerHashTable;
 
 	
-	public static void main(String args[])
-	{
-	ArrayList <String> sr=new ArrayList();
-	ArrayList <String> sr1=new ArrayList();
 
-
-	sr.add("hello");
-	sr.add("goodbye");
-	sr1.addAll(sr);
-	String[] sr2=new String[sr1.size()];
-	sr1.toArray(sr2);
-	System.out.println(sr1.get(1));
-	System.out.println(sr2[0]);
-	}
 	public GameBoard makeMove(Point movedBox, char dir){
 		Point newBoxPos = movedBox.makeMove(dir);
 		
 		return this;		
+	}
+	
+	public GameBoard getEndBoard(){
+		ArrayList<Point> goalBoxPositions= new ArrayList<Point>();
+		for(int i=0;i<board.ySize;i++){
+			for(int k=0; k<board.xSize;k++){
+				if(board.isGoal(k,i)==true){
+					goalBoxPositions.add(new Point(k,i));
+				}
+				
+			}
+		}
+		
+		return new GameBoard(this,goalBoxPositions);
 	}
 	
 	public static ArrayList<Point> cloneList(ArrayList<Point> list) {
@@ -40,6 +41,14 @@ public class GameBoard {
 		return clone;
 	}
 
+	public GameBoard(GameBoard old,ArrayList<Point> goalBoxPositions){
+		this.board=old.board;
+		this.boxes=cloneList(goalBoxPositions);
+		this.player=old.player.clone();
+		this.boxHashTable=old.boxHashTable;
+		this.playerHashTable=old.playerHashTable;	
+		
+	}
 	public GameBoard(GameBoard old){
 		this.board=old.board;
 		this.boxes=cloneList(old.boxes);
@@ -48,7 +57,6 @@ public class GameBoard {
 		this.playerHashTable=old.playerHashTable;	
 		
 	}
-
 	public GameBoard(String[] text) {
 		random = new Random();
 
