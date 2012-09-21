@@ -1,19 +1,40 @@
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-
+import java.util.*;
 
 public class GameBoardTree {
 	// A tree with all the permutations of boards, used in the BFS
-	private int xrange;
-	private int yrange;
-	private MapNode start;
+	GameBoardNode root;
+	Queue<GameBoardNode> bfsQueue;
 	
-	public GameBoardTree(int x, int y){
-		xrange = x;
-		yrange = y;
+	public GameBoardTree(GameBoard root){
+		this.root = new GameBoardNode(null, root);
+		
+		bfsQueue = new LinkedList<GameBoardNode>();
+	}
+	
+	public void totalSearch() {
+		bfsQueue.clear();
+		
+		bfsQueue.add(root);
+		
+		while(!bfsQueue.isEmpty()) {
+			expandNext();
+		}
 	}
 
-
+	public void expandNext() {
+		GameBoardNode expansionNode = bfsQueue.poll();
+		
+		Set<GameBoard> valids = MoveValidator.getValidPermutations(expansionNode.gameBoard);
+		
+		Iterator<GameBoard> it = valids.iterator();
+		
+		while(it.hasNext()) {
+			GameBoardNode newNode = new GameBoardNode(expansionNode, it.next());
+			expansionNode.addChild(newNode);
+			bfsQueue.add(newNode);
+		}
+	}
+	/*
 	public String BFS() {
 		boolean visited[][]= new boolean[xrange][yrange];
 		Point[][] path= new Point[xrange][yrange];
@@ -69,5 +90,5 @@ public class GameBoardTree {
 	public String path(Point p){
 		return "";
 	}
-
+*/
 }
