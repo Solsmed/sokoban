@@ -172,10 +172,9 @@ public class GameBoard {
         queue.add(from);
 		boolean[] visited = new boolean[board.getSize().getX()*board.getSize().getY()];
         ArrayList<Integer> adjacent;
-        int current;
         while(!queue.isEmpty() && !found){
-         current = queue.poll();
-            adjacent = neighbour.get(current);
+         currPos = queue.poll();
+            adjacent = neighbour.get(currPos);
             for(int i:adjacent){
              if(!visited[i] && !found){
               queue.add(i);                                       
