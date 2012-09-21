@@ -69,9 +69,19 @@ public class GameBoard {
 		this.playerHashTable=old.playerHashTable;	
 		
 	}
-	public GameBoard(String[] text) {
+	public GameBoard(String[] data) {
 		random = new Random();
 
+		// find out dimensions
+        int width = 0;
+		int height = data.length;
+		
+		for(int i = 0; i < height; i++) {
+			width = width < data[i].length() ? data[i].length() : width;
+		}
+		
+		board = new StaticBoard(width, height);
+		
 		// parse string and create board
 		// copy boxes and player into startBoard, mutate stuff and make endBoard
 		// let startBoard and endBoard point to the same StaticBoard as this instance.
@@ -84,6 +94,32 @@ public class GameBoard {
 				boxHashTable[x][y] = random.nextInt();
 				playerHashTable[x][y] = random.nextInt();
 			}
+		
+		for(int y = 0; y < data.length; y++) {
+			char[] lineData = data[y].toCharArray();
+			for(int x = 0; x < lineData.length; x++) {
+				switch(lineData[x]) {
+				case 0x2b:
+					board.goal[x][y] = true;
+				case 0x40:
+					player = new Point(x, y);
+					board.start = new Point(x, y);
+				case 0x20:
+					board.floor[x][y] = true;
+					break;
+				case 0x2a:
+					boxes.add(new Point(x, y));
+				case 0x2e:
+					board.goal[x][y] = true;
+					board.floor[x][y] = true;
+					break;
+				case 0x24:
+					boxes.add(new Point(x, y));
+					board.floor[x][y] = true;
+					break;
+				}
+			}
+		}
 	}
 
 	@Override

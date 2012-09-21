@@ -1,16 +1,16 @@
 public class StaticBoard {
-	private boolean[][] floor;
-	private boolean[][] goal;
+	boolean[][] floor;
+	boolean[][] goal;
 	int xSize;
 	int ySize;
 	Point start;
 	
-	public StaticBoard(boolean floor[][], boolean goal[][], int xSize, int ySize,Point start){
+	public StaticBoard(int xSize, int ySize){
 		this.xSize = xSize;
 		this.ySize = ySize;
-		this.floor = floor;
-		this.goal = goal;
-		this.start=start;
+		this.floor = new boolean[xSize][ySize];
+		this.goal = new boolean[xSize][ySize];
+		this.start=null;
 	}
 	
 	public boolean isFloor(int x, int y) {
