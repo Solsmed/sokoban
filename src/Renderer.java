@@ -8,10 +8,11 @@ public class Renderer {
 		for(int y=0;y<boardSize.getY();y++){
 			for(int x=0;x<boardSize.getX();x++){
 				if(b.board.isFloor(x, y))
-					sb.append('#');
-				else
 					sb.append(' ');
+				else
+					sb.append('#');
 			}
+			sb.append('\n');
 		}
 		
 		System.out.println(sb.toString());
