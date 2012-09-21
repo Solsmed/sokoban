@@ -163,11 +163,11 @@ public class GameBoard {
 	//returns true if we can go from start point to goal point
 	public boolean goToPoint(int fromX, int fromY, int toX, int toY){
 		int from = fromY * board.getSize().getX() + fromX;
-		
+		int goal = toY*board.getSize().getX() + toX;
 		boolean found = false;
 		int currPos = from;
 		int nextPos;
-		ArrayList<ArrayList<Integer>> neighbour;
+		ArrayList<ArrayList<Integer>> neighbour = new ArrayList<ArrayList<Integer>>();
 		Queue<Integer> queue = new LinkedList<Integer>();
         queue.add(from);
 		boolean[] visited = new boolean[board.getSize().getX()*board.getSize().getY()];
@@ -180,13 +180,12 @@ public class GameBoard {
              if(!visited[i] && !found){
               queue.add(i);                                       
                     visited[i]=true;
-                    if(goal.contains(i)){
-                     tracer = i;
+                    if(i == goal){
                      found=true;  
                     }
-                    trace[i] = current;
              }
             }
         }
+        return false;
 	}
 }
