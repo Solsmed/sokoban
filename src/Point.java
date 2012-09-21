@@ -41,6 +41,6 @@ public class Point {
 			break;
 			
 		}
-		return new Point(this.getX() + xdiff, this.getY() + ydiff);
+		return new Point(x + xdiff, y + ydiff);
 	}
 }

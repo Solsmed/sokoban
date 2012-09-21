@@ -14,13 +14,13 @@ public class GameBoard {
 	GameBoard endBoard;
 	
 	
-	public GameBoard updateMove(GameBoard gb, int pos, char dir){
-		Point p = gb.boxes.get(pos);
-		p = p.makeMove(dir);
-		return gb;
+	public GameBoard makeMove(Point movedBox, char dir){
+		Point newBoxPos = movedBox.makeMove(dir);
 		
+		return null;		
 	}
-	public GameBoard(String text) {
+	
+	public GameBoard(String[] text) {
 		random = new Random();
 
 		// parse string and create board
