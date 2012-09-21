@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 public class Client {
-	StaticBoard gameBoard=null;
+	GameBoard gameBoard = null;
 	
 	public Client(){
 		
@@ -51,7 +51,8 @@ public class Client {
 //
 //
 					}
-				GameBoard gameBoard = new GameBoard(lBoard);
+				gameBoard = new GameBoard(lBoard.toString());
+				GameBoardTree gameBoardTree = new GameBoardTree(gameBoard);
 				
 					
 					//here, we would store the row somewhere, to build our board
@@ -77,13 +78,6 @@ public class Client {
 			e.printStackTrace();
 		}
 	}
-
-
-
-
-
-
-
 
 	public static void main(String[] pArgs) 
 	{
