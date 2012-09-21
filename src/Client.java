@@ -46,15 +46,15 @@ public class Client {
 	{
 		Client agent= new Client();
 		agent.readFromFile("test_board_1");
-		/*	if(pArgs.length<3)
+			if(pArgs.length<3)
 		{
 			System.out.println("usage: java Client host port boardnum");
 			return;
 		}
-		 */
+		
 		try
 		{
-			/*	Socket lSocket=new Socket(pArgs[0],Integer.parseInt(pArgs[1]));
+			Socket lSocket=new Socket(pArgs[0],Integer.parseInt(pArgs[1]));
 			PrintWriter lOut=new PrintWriter(lSocket.getOutputStream());
 			BufferedReader lIn=new BufferedReader(new InputStreamReader(lSocket.getInputStream()));
 
@@ -65,37 +65,30 @@ public class Client {
 
 			//read number of rows
 			int lNumRows=Integer.parseInt(lLine);
-			agent.gameBoard.yrange=lNumRows;
+			lLine=lIn.readLine();
+			int lNumCols=lLine.length();
+			String[] lBoard = null;
 
 			//read each row
-			agent.readFromFile("test_board_1");
-			for(int y=0;y<lNumRows;y++)
+			//agent.readFromFile("test_board_1");
+			for(int i=0;i<lNumRows;i++)
 			{
 				lLine=lIn.readLine();
-				if(agent.gameBoard.map==null){
-				agent.gameBoard.map= new MapNode[lLine.length()][lNumRows];
-				agent.gameBoard.xrange=lLine.length();
-				}
-
-				for(int x=0; x<lLine.length();x++){
-					if(lLine.charAt(x)=='@'||lLine.charAt(x)=='+'){
-						agent.gameBoard.start=new MapNode(x,y,lLine.charAt(x));
-					}
-					MapNode Node = new MapNode(x,y,lLine.charAt(x));
-					agent.gameBoard.addMapNode(x,y,Node);
-
-
-
-				}
+				lBoard[i] = lLine;
+			}
+			gameBoard = new GameBoard(lBoard);
+			GameBoardTree gameBoardTree = new GameBoardTree(gameBoard);
+			
+			gameBoardTree.totalSearch();
 				//here, we would store the row somewhere, to build our board
 				//in this demo, we just print it
 				 System.out.println(lLine);
 			}
 			//System.out.println(agent.BFS());
-			String path=agent.gameBoard.BFS();
-			System.out.println(path);
-			if(path==null)
-				path="";
+			//String path=agent.gameBoard.BFS();
+			//System.out.println(path);
+			//if(path==null)
+			//	path="";
 			//now, we should find a path from the player to any goal
 
 			//we've found our solution
@@ -105,13 +98,13 @@ public class Client {
 			//String lMySol="0 3 3 0 0 2 1 2 2 0 2 2 1 3 3 3 3 2 1 1 3 0 3 0 1 2 2 0 3";
 
 			//send the solution to the server
-			lOut.println(path);
-			lOut.flush();
+			//lOut.println(path);
+			//lOut.flush();
 
 			//read answer from the server
 			lLine=lIn.readLine();
 
-			System.out.println(lLine);*/
+			System.out.println(lLine);
 		}
 		catch(Throwable t)
 		{
