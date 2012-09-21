@@ -10,7 +10,7 @@ public class Client {
 	public Client(){
 		gameBoard = null;
 	}
-
+	//method that reads map from local file
 	public void readFromFile(String fileName){
 		BufferedReader br = null;
 		try {
@@ -24,9 +24,6 @@ public class Client {
 				lBoard = new String[lNumRows];
 			}
 
-			//			while ((lLine = br.readLine()) != null) {
-
-
 			//read each row
 
 			for(int i=0;i<lNumRows;i++)
@@ -34,12 +31,11 @@ public class Client {
 				lLine=br.readLine();
 				lBoard[i] = lLine;
 			}
-			gameBoard = new GameBoard(lBoard.toString());
+			gameBoard = new GameBoard(lBoard);
 			GameBoardTree gameBoardTree = new GameBoardTree(gameBoard);
-
-
-			//here, we would store the row somewhere, to build our board
-			//in this demo, we just print it
+			
+			gameBoardTree.totalSearch();
+			
 			//System.out.println(lLine);
 		}catch(Exception e){
 			e.printStackTrace();

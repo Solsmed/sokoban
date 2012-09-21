@@ -169,6 +169,39 @@ public class GameBoard {
 		}
 		return false;
 	}
+	
+	public boolean canPull(Point p, char direction) {
+		int x=p.getX();
+		int y=p.getY();
+		switch (direction) {
+		case 'U':
+			if (y < board.ySize && y > 1) {
+				if (isWalkable(x,y-1)&&(isWalkable(x,y-2)))
+					return true;
+			}
+			break;
+		case 'R':
+			if (x < (board.xSize - 2) && x >= 0) {
+				if (isWalkable(x+1,y)&&(isWalkable(x+2,y)))
+					return true;
+			}
+			break;
+		case 'D':
+			if (y < (board.ySize - 2) && y >= 0) {
+				if (isWalkable(x,y+1)&&(isWalkable(x,y+2)))
+					return true;
+			}
+			break;
+		case 'L':
+			if (x < board.xSize && x > 1) {
+				if (isWalkable(x-1,y)&&(isWalkable(x-2,y)))
+					return true;
+			}
+			break;
+		}
+
+		return false;
+	}
 
 	public boolean isWalkable(int x, int y) {
 		return board.isFloor(x, y) && !hasBox(x, y);
