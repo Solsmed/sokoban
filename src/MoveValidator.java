@@ -8,7 +8,7 @@ public class MoveValidator {
 		for(Point box : boxes){
 			for(char direction: directions){
 				if(b.canPull(box,direction)){
-					box = box.makeMove(direction);
+					validPermutations.add(b.makeMove(box, direction));
 				}
 			}
 		}
