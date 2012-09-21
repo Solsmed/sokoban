@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 
 public class Client {
-	Board gameBoard=null;
+	StaticBoard gameBoard=null;
 	
 	public Client(){
-		gameBoard=new Board();
+		gameBoard=new GameBaord();
 		
 	}
 	
@@ -160,4 +160,25 @@ public class Client {
 			t.printStackTrace();
 		}
 	}
+	
+	/*
+	public void printEndBoard(){
+		System.out.println("ENDBOARD PRINT");
+		for(int i=0;i<yrange;i++){
+			for(int k=0;k<xrange;k++){
+				System.out.print(endboard[k][i].data);
+			}
+			System.out.println();
+		}
+	}
+	public void printStartBoard(){
+		System.out.println("STARTBOARD PRINT");
+		for(int i=0;i<yrange;i++){
+			for(int k=0;k<xrange;k++){
+				System.out.print(startboard[k][i].data);
+			}
+			System.out.println();
+		}
+	}
+*/
 }
