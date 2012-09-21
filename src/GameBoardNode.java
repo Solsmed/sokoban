@@ -2,48 +2,57 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class GameBoardNode {
-	GameBoardTree tree;
+	private GameBoardTree tree;
 	GameBoardNode parent;
 	Set<GameBoardNode> children;
 	
 	GameBoard gameBoard;
 	
-	public GameBoardNode(GameBoardTree tree, GameBoardNode parent, GameBoard gb) {
-		this.tree = tree;
-		this.tree.addNode(this);
+	public GameBoardNode(GameBoardNode parent, GameBoard gb) {
 		gameBoard = gb;
 		
 		children = null;
 	}
 	
-	public boolean addChild(GameBoardNode b) {
-		return children.add(b);
+	public void setTree(GameBoardTree tree) {
+		if(parent == null)
+			this.tree = tree;
 	}
 	
+	private GameBoardTree getTree() {
+		return getRoot().tree;
+	}
+		
 	public Set<GameBoardNode> getChildren() {
-		if(children != null) {
-			return children;
-		}
-		
-		makeChildren();
-		
 		return children;
 	}
 	
-	private void makeChildren() {
+	public Set<GameBoardNode> spawnChildren() {
 		Set<GameBoard> newChildren = MoveValidator.getValidPermutations(gameBoard);
 		
 		Iterator<GameBoard> it = newChildren.iterator();
 		
 		while(it.hasNext()) {
-			GameBoardNode newNode = new GameBoardNode(tree, this, it.next());
-			addChild(newNode);
+			GameBoardNode newNode = new GameBoardNode(this, it.next());
+			if(!getRoot().tree.nodeSet.contains(newNode))
+				children.add(newNode);
 		}
+		
+		return getChildren();
 	}
 	
 	@Override
 	public int hashCode() {
 		return gameBoard.hashCode();
+	}
+	
+	private GameBoardNode getRoot() {
+		GameBoardNode root = null;
+		
+		while(parent != null)
+			root = root.parent;
+		
+		return root;
 	}
 	
 	public boolean equals(Object obj) {
