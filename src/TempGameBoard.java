@@ -1,7 +1,10 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 
 public class TempGameBoard {
+	HashSet<Character> moveable;
+	
 	// checking if player can walk backwards i.e there is a empty square behind player in any direction
 	//return is an array of all possible direction one can walk
 	public ArrayList<MapNode> canWalk(){
@@ -22,6 +25,48 @@ public class TempGameBoard {
 
 		}
 		return walkablepos;
+	}
+	
+	public TempGameBoard(){
+		moveable=new HashSet<Character>();
+		moveable.add(' ');
+		moveable.add('.');
+		moveable.add('@');
+		moveable.add('+');
+		
+	}
+	
+	// x,y is the coordinates of a box
+	// checks wether its possible to move the box in a given direction
+	public boolean canPull(int x, int y, char direction) {
+		switch (direction) {
+		case 'U':
+			if (y < height && y > 1) {
+				if (board.isWalkable(x,y-1))&&(board.isWalkable(x,y-2)))
+					return true;
+			}
+			break;
+		case 'R':
+			if (x < (width - 2) && x >= 0) {
+				if (board.isWalkable(x+1,y))&&(board.isWalkable(x+2,y)))
+					return true;
+			}
+			break;
+		case 'D':
+			if (y < (height - 2) && y >= 0) {
+				if (board.isWalkable(x,y+1))&&(board.isWalkable(x,y+2)))
+					return true;
+			}
+			break;
+		case 'L':
+			if (x < width && x > 1) {
+				if (board.isWalkable(x-1,y))&&(board.isWalkable(x-2,y)))
+					return true;
+			}
+			break;
+		}
+
+		return false;
 	}
 	
 	
