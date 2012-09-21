@@ -33,9 +33,9 @@ public class Client {
 			}
 			gameBoard = new GameBoard(lBoard);
 			GameBoardTree gameBoardTree = new GameBoardTree(gameBoard);
-			
+
 			gameBoardTree.totalSearch();
-			
+
 			//System.out.println(lLine);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -46,14 +46,12 @@ public class Client {
 	{
 		Client agent= new Client();
 		agent.readFromFile("test_board_1");
-			if(pArgs.length<3)
+		if(pArgs.length<3)
 		{
 			System.out.println("usage: java Client host port boardnum");
 			return;
 		}
-		
-		try
-		{
+		try{
 			Socket lSocket=new Socket(pArgs[0],Integer.parseInt(pArgs[1]));
 			PrintWriter lOut=new PrintWriter(lSocket.getOutputStream());
 			BufferedReader lIn=new BufferedReader(new InputStreamReader(lSocket.getInputStream()));
@@ -78,12 +76,11 @@ public class Client {
 			}
 			gameBoard = new GameBoard(lBoard);
 			GameBoardTree gameBoardTree = new GameBoardTree(gameBoard);
-			
+
 			gameBoardTree.totalSearch();
-				//here, we would store the row somewhere, to build our board
-				//in this demo, we just print it
-				 System.out.println(lLine);
-			}
+			//here, we would store the row somewhere, to build our board
+			//in this demo, we just print it
+			System.out.println(lLine);
 			//System.out.println(agent.BFS());
 			//String path=agent.gameBoard.BFS();
 			//System.out.println(path);
@@ -102,34 +99,13 @@ public class Client {
 			//lOut.flush();
 
 			//read answer from the server
-			lLine=lIn.readLine();
+			//lLine=lIn.readLine();
 
-			System.out.println(lLine);
+			//System.out.println(lLine);
 		}
 		catch(Throwable t)
 		{
 			t.printStackTrace();
 		}
 	}
-
-	/*
-	public void printEndBoard(){
-		System.out.println("ENDBOARD PRINT");
-		for(int i=0;i<yrange;i++){
-			for(int k=0;k<xrange;k++){
-				System.out.print(endboard[k][i].data);
-			}
-			System.out.println();
-		}
-	}
-	public void printStartBoard(){
-		System.out.println("STARTBOARD PRINT");
-		for(int i=0;i<yrange;i++){
-			for(int k=0;k<xrange;k++){
-				System.out.print(startboard[k][i].data);
-			}
-			System.out.println();
-		}
-	}
-	 */
 }
