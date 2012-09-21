@@ -94,7 +94,7 @@ public class GameBoard {
 				boxHashTable[x][y] = random.nextInt();
 				playerHashTable[x][y] = random.nextInt();
 			}
-		
+		boxes=new ArrayList<Point>();
 		for(int y = 0; y < data.length; y++) {
 			char[] lineData = data[y].toCharArray();
 			for(int x = 0; x < lineData.length; x++) {
@@ -165,18 +165,24 @@ public class GameBoard {
 
 			visited[x][y] = true;
 
-			for(int dy = -1; dy <= 1; dy++)
-				for(int dx = -1; dx <= 1; dx++)
-					if(x+dx>=0 && x+dx<board.xSize &&
-					y+dy>=0 && y+dy<board.ySize &&
-					!visited[x+dx][y+dx] &&
-					isWalkable(x+dx, y+dy)) {
-						queue.add(new Point(x+dx,y+dx));
-						if(y < minY) {
-							minY = y;
-							minX = x;
-						}
-					}
+			int dx[] = new int[] {0,1,0,-1};
+			int dy[] = new int[] {-1,0,1,0};
+			
+			for(int d = 0; d < dx.length; d++) {
+				int nx = x+dx[d];
+				int ny = y+dy[d];
+				if(nx>=0 && nx<board.xSize) {
+					if(ny>=0 && ny<board.ySize)
+						if(!visited[nx][ny])
+							if(isWalkable(nx, ny)) {
+								queue.add(new Point(x+dx[d],y+dx[d]));
+								if(y < minY) {
+									minY = y;
+									minX = x;
+								}
+							}
+				}
+			}
 		}
 
 		// find min x
