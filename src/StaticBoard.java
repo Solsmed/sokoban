@@ -26,9 +26,9 @@ public class StaticBoard {
 		}
 	}
 	
-	public boolean isGoal(Point p) {
+	public boolean isGoal(int x,int y) {
 		try {
-			return goal[p.getX()][p.getY()];
+			return goal[x][y];
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.err.println("isGoal(): no such position. " + p + ", board size: " + xSize + "," + ySize);
 			return false;
