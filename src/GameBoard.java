@@ -52,11 +52,7 @@ public class GameBoard {
 	}
 
 	private Point getAnchorPoint(int fromX, int fromY) {
-		int anchorX = 0;
-		int anchorY = 0;
-		
-		
-		boolean visited[][] = new boolean[board.getSize().getX()][board.getSize().getY()];
+		boolean visited[][] = new boolean[board.xSize][board.ySize];
 		
 		Queue<Point> queue = new LinkedList<Point>();
 		
@@ -65,14 +61,40 @@ public class GameBoard {
 		int minX = fromX;
 		int minY = fromY;
 		
+		Point currentPoint;
+		int x;
+		int y;
+		// find minY
 		while(!queue.isEmpty()) {
+			currentPoint = queue.poll();
 			
+			x = currentPoint.getX();
+			y = currentPoint.getY();
+			
+			visited[x][y] = true;
+			
+			for(int dy = -1; dy <= 1; dy++)
+			for(int dx = -1; dx <= 1; dx++)
+				if(x+dx>=0 && x+dx<board.xSize &&
+				   y+dy>=0 && y+dy<board.ySize &&
+				   !visited[x+dx][y+dx] &&
+				   isWalkable(x+dx, y+dy)) {
+					queue.add(new Point(x+dx,y+dx));
+					if(y < minY) {
+						minY = y;
+						minX = x;
+					}
+				}
 		}
 		
-		// find northernmost reachable position through bfs
-		// bfs()
-		// go left as far as possible
-		return new Point(anchorX, anchorY);
+		// find min x
+		x = minX;
+		y = minY;
+		while(board.isFloor(x - 1, y)) {
+			minX = x = x - 1;
+		}
+		
+		return new Point(x, y);
 	}
 	
 	private GameBoard update(Move m){
@@ -105,5 +127,17 @@ public class GameBoard {
             }
         }
         return false;
+	}
+	
+	public boolean isWalkable(int x, int y) {
+		return board.isFloor(x, y) && !hasBox(x, y);
+	}
+	
+	public boolean hasBox(int x, int y) {
+		for(int b = 0; b < boxes.size(); b++) {
+			if(boxes.get(b).getX() == x && boxes.get(b).getY() == y)
+				return true;
+		}
+		return false;
 	}
 }

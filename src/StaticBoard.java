@@ -1,8 +1,8 @@
 public class StaticBoard {
 	private boolean[][] floor;
 	private boolean[][] goal;
-	private int xSize;
-	private int ySize;
+	int xSize;
+	int ySize;
 	
 	public StaticBoard(boolean floor[][], boolean goal[][], int xSize, int ySize){
 		this.xSize = xSize;
@@ -33,6 +33,7 @@ public class StaticBoard {
 		}
 	}
 	
+	@Deprecated
 	public Point getSize() {
 		return new Point(xSize, ySize);
 	}
