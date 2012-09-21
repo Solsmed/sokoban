@@ -6,19 +6,17 @@ import java.util.ArrayList;
 
 
 public class Client {
-	GameBoard gameBoard = null;
-	
+	private GameBoard gameBoard;
 	public Client(){
-		
-		
+		gameBoard = null;
 	}
-	
+
 	public void readFromFile(String fileName){
 		BufferedReader br = null;
 		try {
 			String lLine;
 			int lNumRows=0;
- //
+			//
 			br = new BufferedReader(new FileReader("Maps/"+fileName));
 			String[] lBoard = null;
 			while(lNumRows==0&&(lLine = br.readLine()) != null){
@@ -26,54 +24,23 @@ public class Client {
 				lBoard = new String[lNumRows];
 			}
 
-//			while ((lLine = br.readLine()) != null) {
+			//			while ((lLine = br.readLine()) != null) {
 
 
-				//read each row
+			//read each row
 
-				for(int i=0;i<lNumRows;i++)
-				{
-					lLine=br.readLine();
-					lBoard[i] = lLine;
-//					if(gameBoard.map==null){
-//						gameBoard.map= new MapNode[lLine.length()][lNumRows];
-//						gameBoard.xrange=lLine.length();
-//					}
-//
-//					for(int x=0; x<lLine.length();x++){
-//						if(lLine.charAt(x)=='@'||lLine.charAt(x)=='+'){
-//							gameBoard.start=new MapNode(x,y,lLine.charAt(x));
-//							gameBoard.playerPos=new Point(x,y);
-//						}
-//						MapNode Node = new MapNode(x,y,lLine.charAt(x));
-//						gameBoard.addMapNode(x,y,Node);
-//
-//
-//
-					}
-				gameBoard = new GameBoard(lBoard.toString());
-				GameBoardTree gameBoardTree = new GameBoardTree(gameBoard);
-				
-					
-					//here, we would store the row somewhere, to build our board
-					//in this demo, we just print it
-					//System.out.println(lLine);
-//				gameBoard.initialize();
-//				String path=gameBoard.BFS();
-//				gameBoard.printBoard();
-//				gameBoard.printStartBoard();
-//				gameBoard.printEndBoard();
-//				System.out.println("MOVING DOWN WEEE");
-//				gameBoard.Walk(new MapNode(2,3,' '));
-//				gameBoard.printBoard();
-//				gameBoard.printStartBoard();
-//				gameBoard.printEndBoard();
+			for(int i=0;i<lNumRows;i++)
+			{
+				lLine=br.readLine();
+				lBoard[i] = lLine;
+			}
+			gameBoard = new GameBoard(lBoard.toString());
+			GameBoardTree gameBoardTree = new GameBoardTree(gameBoard);
 
-//				if(path==null){
-//					path="";
-//				}
-//				System.out.println(path);
-//			}
+
+			//here, we would store the row somewhere, to build our board
+			//in this demo, we just print it
+			//System.out.println(lLine);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -83,15 +50,15 @@ public class Client {
 	{
 		Client agent= new Client();
 		agent.readFromFile("test_board_1");
-	/*	if(pArgs.length<3)
+		/*	if(pArgs.length<3)
 		{
 			System.out.println("usage: java Client host port boardnum");
 			return;
 		}
-*/
+		 */
 		try
 		{
-		/*	Socket lSocket=new Socket(pArgs[0],Integer.parseInt(pArgs[1]));
+			/*	Socket lSocket=new Socket(pArgs[0],Integer.parseInt(pArgs[1]));
 			PrintWriter lOut=new PrintWriter(lSocket.getOutputStream());
 			BufferedReader lIn=new BufferedReader(new InputStreamReader(lSocket.getInputStream()));
 
@@ -99,7 +66,7 @@ public class Client {
 			lOut.flush();
 
 			String lLine=lIn.readLine();
-			
+
 			//read number of rows
 			int lNumRows=Integer.parseInt(lLine);
 			agent.gameBoard.yrange=lNumRows;
@@ -113,7 +80,7 @@ public class Client {
 				agent.gameBoard.map= new MapNode[lLine.length()][lNumRows];
 				agent.gameBoard.xrange=lLine.length();
 				}
-			
+
 				for(int x=0; x<lLine.length();x++){
 					if(lLine.charAt(x)=='@'||lLine.charAt(x)=='+'){
 						agent.gameBoard.start=new MapNode(x,y,lLine.charAt(x));
@@ -155,7 +122,7 @@ public class Client {
 			t.printStackTrace();
 		}
 	}
-	
+
 	/*
 	public void printEndBoard(){
 		System.out.println("ENDBOARD PRINT");
@@ -175,5 +142,5 @@ public class Client {
 			System.out.println();
 		}
 	}
-*/
+	 */
 }
