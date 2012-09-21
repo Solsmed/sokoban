@@ -12,7 +12,14 @@ public class GameBoard {
 
 	GameBoard startBoard;
 	GameBoard endBoard;
-
+	
+	
+	public GameBoard updateMove(GameBoard gb, int pos, char dir){
+		Point p = gb.boxes.get(pos);
+		p = p.makeMove(dir);
+		return gb;
+		
+	}
 	public GameBoard(String text) {
 		random = new Random();
 

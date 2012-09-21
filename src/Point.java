@@ -22,7 +22,7 @@ public class Point {
 		return "(" + x + "," + y + ")";
 	}
 	
-	public Point makeMove(Point position, char direction){
+	public Point makeMove(char direction){
 		int xdiff = 0;
 		int ydiff = 0;
 		
@@ -41,6 +41,6 @@ public class Point {
 			break;
 			
 		}
-		return new Point(position.getX() + xdiff, position.getY() + ydiff);
+		return new Point(this.getX() + xdiff, this.getY() + ydiff);
 	}
 }
