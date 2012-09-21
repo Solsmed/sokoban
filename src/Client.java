@@ -9,23 +9,21 @@ public class Client {
 	StaticBoard gameBoard=null;
 	
 	public Client(){
-		gameBoard=new GameBaord();
+		
 		
 	}
 	
 	public void readFromFile(String fileName){
 		BufferedReader br = null;
-		 System.out.println("hej");
 		try {
- 
 			String lLine;
 			int lNumRows=0;
  
 			br = new BufferedReader(new FileReader("Maps/"+fileName));
-
+			String[] lBoard = null;
 			while(lNumRows==0&&(lLine = br.readLine()) != null){
 				lNumRows=Integer.parseInt(lLine);
-				gameBoard.yrange=lNumRows;
+				lBoard = new String[lNumRows];
 			}
 
 //			while ((lLine = br.readLine()) != null) {
@@ -33,44 +31,47 @@ public class Client {
 
 				//read each row
 
-				for(int y=0;y<lNumRows;y++)
+				for(int i=0;i<lNumRows;i++)
 				{
 					lLine=br.readLine();
-					if(gameBoard.map==null){
-						gameBoard.map= new MapNode[lLine.length()][lNumRows];
-						gameBoard.xrange=lLine.length();
+					lBoard[i] = lLine;
+//					if(gameBoard.map==null){
+//						gameBoard.map= new MapNode[lLine.length()][lNumRows];
+//						gameBoard.xrange=lLine.length();
+//					}
+//
+//					for(int x=0; x<lLine.length();x++){
+//						if(lLine.charAt(x)=='@'||lLine.charAt(x)=='+'){
+//							gameBoard.start=new MapNode(x,y,lLine.charAt(x));
+//							gameBoard.playerPos=new Point(x,y);
+//						}
+//						MapNode Node = new MapNode(x,y,lLine.charAt(x));
+//						gameBoard.addMapNode(x,y,Node);
+//
+//
+//
 					}
-
-					for(int x=0; x<lLine.length();x++){
-						if(lLine.charAt(x)=='@'||lLine.charAt(x)=='+'){
-							gameBoard.start=new MapNode(x,y,lLine.charAt(x));
-							gameBoard.playerPos=new Point(x,y);
-						}
-						MapNode Node = new MapNode(x,y,lLine.charAt(x));
-						gameBoard.addMapNode(x,y,Node);
-
-
-
-					}
+				GameBoard gameBoard = new GameBoard(lBoard);
+				
+					
 					//here, we would store the row somewhere, to build our board
 					//in this demo, we just print it
 					//System.out.println(lLine);
-				}
-				gameBoard.initialize();
-				String path=gameBoard.BFS();
-				gameBoard.printBoard();
-				gameBoard.printStartBoard();
-				gameBoard.printEndBoard();
-				System.out.println("MOVING DOWN WEEE");
-				gameBoard.Walk(new MapNode(2,3,' '));
-				gameBoard.printBoard();
-				gameBoard.printStartBoard();
-				gameBoard.printEndBoard();
+//				gameBoard.initialize();
+//				String path=gameBoard.BFS();
+//				gameBoard.printBoard();
+//				gameBoard.printStartBoard();
+//				gameBoard.printEndBoard();
+//				System.out.println("MOVING DOWN WEEE");
+//				gameBoard.Walk(new MapNode(2,3,' '));
+//				gameBoard.printBoard();
+//				gameBoard.printStartBoard();
+//				gameBoard.printEndBoard();
 
-				if(path==null){
-					path="";
-				}
-				System.out.println(path);
+//				if(path==null){
+//					path="";
+//				}
+//				System.out.println(path);
 //			}
 		}catch(Exception e){
 			e.printStackTrace();
