@@ -8,7 +8,7 @@ public class Move {
 		position = p;
 	}
 	
-	public Point makeMove(){
+	public Point makeMove(char c){
 		int xdiff = 0;
 		int ydiff = 0;
 		

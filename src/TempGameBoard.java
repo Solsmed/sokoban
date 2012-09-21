@@ -38,7 +38,9 @@ public class TempGameBoard {
 	
 	// x,y is the coordinates of a box
 	// checks wether its possible to move the box in a given direction
-	public boolean canPull(int x, int y, char direction) {
+	public boolean canPull(Point p, char direction) {
+		int x=p.x;
+		int y=p.y;
 		switch (direction) {
 		case 'U':
 			if (y < height && y > 1) {
