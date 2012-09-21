@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 public class Client {
-	private GameBoard gameBoard;
+	private static GameBoard gameBoard;
 	public Client(){
 		gameBoard = null;
 	}
@@ -32,9 +32,9 @@ public class Client {
 				lBoard[i] = lLine;
 			}
 			gameBoard = new GameBoard(lBoard);
-			GameBoardTree gameBoardTree = new GameBoardTree(gameBoard);
+			TreeSearcher treeSearcher = new TreeSearcher(gameBoard.getEndBoard(),gameBoard);
 
-			gameBoardTree.totalSearch();
+			treeSearcher.totalSearch();
 
 			//System.out.println(lLine);
 		}catch(Exception e){
@@ -75,9 +75,9 @@ public class Client {
 				lBoard[i] = lLine;
 			}
 			gameBoard = new GameBoard(lBoard);
-			GameBoardTree gameBoardTree = new GameBoardTree(gameBoard);
+			TreeSearcher treeSearcher = new TreeSearcher(gameBoard.getEndBoard(),gameBoard);
 
-			gameBoardTree.totalSearch();
+			treeSearcher.totalSearch();
 			//here, we would store the row somewhere, to build our board
 			//in this demo, we just print it
 			System.out.println(lLine);
