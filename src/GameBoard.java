@@ -10,16 +10,45 @@ public class GameBoard {
 	private static int[][] boxHashTable;
 	private static int[][] playerHashTable;
 
-	GameBoard startBoard;
-	GameBoard endBoard;
 	
-	
+	public static void main(String args[])
+	{
+	ArrayList <String> sr=new ArrayList();
+	ArrayList <String> sr1=new ArrayList();
+
+
+	sr.add("hello");
+	sr.add("goodbye");
+	sr1.addAll(sr);
+	String[] sr2=new String[sr1.size()];
+	sr1.toArray(sr2);
+	System.out.println(sr1.get(1));
+	System.out.println(sr2[0]);
+	}
 	public GameBoard makeMove(Point movedBox, char dir){
 		Point newBoxPos = movedBox.makeMove(dir);
 		
-		return null;		
+		return this;		
 	}
 	
+	public static ArrayList<Point> cloneList(ArrayList<Point> list) {
+		ArrayList<Point> clone = new ArrayList<Point>(list.size());
+		for(Point item: list) {
+			clone.add((Point) item.clone());
+
+		}
+		return clone;
+	}
+
+	public GameBoard(GameBoard old){
+		this.board=old.board;
+		this.boxes=cloneList(old.boxes);
+		this.player=old.player.clone();
+		this.boxHashTable=old.boxHashTable;
+		this.playerHashTable=old.playerHashTable;	
+		
+	}
+
 	public GameBoard(String[] text) {
 		random = new Random();
 

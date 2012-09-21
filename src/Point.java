@@ -1,5 +1,5 @@
 
-public class Point {
+public class Point implements Cloneable {
 	private int x;
 	private int y; 
 	
@@ -15,6 +15,9 @@ public class Point {
 	public void translate(int dx, int dy) {
 		x += dx;
 		y += dy;
+	}
+	public Point clone(){
+		return new Point(this.x,this.y);
 	}
 	
 	@Override

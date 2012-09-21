@@ -3,12 +3,14 @@ public class StaticBoard {
 	private boolean[][] goal;
 	int xSize;
 	int ySize;
+	Point start;
 	
-	public StaticBoard(boolean floor[][], boolean goal[][], int xSize, int ySize){
+	public StaticBoard(boolean floor[][], boolean goal[][], int xSize, int ySize,Point start){
 		this.xSize = xSize;
 		this.ySize = ySize;
 		this.floor = floor;
 		this.goal = goal;
+		this.start=start;
 	}
 	
 	public boolean isFloor(int x, int y) {

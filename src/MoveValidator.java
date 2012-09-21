@@ -8,7 +8,8 @@ public class MoveValidator {
 		for(Point box : boxes){
 			for(char direction: directions){
 				if(b.canPull(box,direction)){
-					validPermutations.add(b.makeMove(box, direction));
+					GameBoard newboard=new GameBoard(b);
+					validPermutations.add(newboard.makeMove(box, direction));
 				}
 			}
 		}
