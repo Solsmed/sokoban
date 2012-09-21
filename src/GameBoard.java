@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class GameBoard {
 	StaticBoard board;
@@ -157,5 +159,33 @@ public class GameBoard {
 	private GameBoard update(Move m){
 		//use the makeMove-function in Move to change a move's direction
 		return null;
+	}
+	//returns true if we can go from start point to goal point
+	public boolean goToPoint(int fromX, int fromY, int toX, int toY){
+		int from = fromY * board.getSize().getX() + fromX;
+		int goal = toY*board.getSize().getX() + toX;
+		boolean found = false;
+		int currPos = from;
+		int nextPos;
+		ArrayList<ArrayList<Integer>> neighbour = new ArrayList<ArrayList<Integer>>();
+		Queue<Integer> queue = new LinkedList<Integer>();
+        queue.add(from);
+		boolean[] visited = new boolean[board.getSize().getX()*board.getSize().getY()];
+        ArrayList<Integer> adjacent;
+        int current;
+        while(!queue.isEmpty() && !found){
+         current = queue.poll();
+            adjacent = neighbour.get(current);
+            for(int i:adjacent){
+             if(!visited[i] && !found){
+              queue.add(i);                                       
+                    visited[i]=true;
+                    if(i == goal){
+                     found=true;  
+                    }
+             }
+            }
+        }
+        return false;
 	}
 }
