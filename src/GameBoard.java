@@ -38,7 +38,10 @@ public class GameBoard {
 			}
 		}
 		
-		return new GameBoard(this,goalBoxPositions);
+		GameBoard newBoard = new GameBoard(this,goalBoxPositions);
+		newBoard.board = board;
+		
+		return newBoard;
 	}
 	
 	public static ArrayList<Point> cloneList(ArrayList<Point> list) {
