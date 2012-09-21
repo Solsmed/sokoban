@@ -24,7 +24,10 @@ public class Point implements Cloneable {
 	public String toString() {
 		return "(" + x + "," + y + ")";
 	}
-	
+	public boolean equals(Point p){
+		return (this.x==p.x&&this.y==p.y) ? true :false;
+		
+	}
 	public Point makeMove(char direction){
 		int xdiff = 0;
 		int ydiff = 0;

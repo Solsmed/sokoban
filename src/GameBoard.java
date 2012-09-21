@@ -13,7 +13,16 @@ public class GameBoard {
 	
 
 	public GameBoard makeMove(Point movedBox, char dir){
-		Point newBoxPos = movedBox.makeMove(dir);
+
+		// hitta o ersätt boxen som ska bytas ut
+		for(Point box: boxes){
+			if(box.equals(movedBox)){
+				movedBox=movedBox.makeMove(dir);
+			}
+		}
+		player=player.makeMove(dir);
+		
+		
 		
 		return this;		
 	}
