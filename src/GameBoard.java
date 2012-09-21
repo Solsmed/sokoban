@@ -153,4 +153,9 @@ public class GameBoard {
 		// go left as far as possible
 		return new Point(anchorX, anchorY);
 	}
+	
+	private GameBoard update(Move m){
+		//use the makeMove-function in Move to change a move's direction
+		return null;
+	}
 }

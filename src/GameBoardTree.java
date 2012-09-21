@@ -4,18 +4,25 @@ import java.util.ArrayList;
 
 public class GameBoardTree {
 	// A tree with all the permutations of boards, used in the BFS
+	private int xrange;
+	private int yrange;
+	private MapNode start;
 	
+	public GameBoardTree(int x, int y){
+		xrange = x;
+		yrange = y;
+	}
 
 
 	public String BFS() {
 		boolean visited[][]= new boolean[xrange][yrange];
-		path= new Point[xrange][yrange];
+		Point[][] path= new Point[xrange][yrange];
 
-		visited[start.x][start.y]=true;
-		path[start.x][start.y]=new Point(start.x,start.y);
+		visited[start.getX()][start.getY()]=true;
+		path[start.getX()][start.getY()]=new Point(start.getX(),start.getY());
 		if(start.data=='+'){
 			//done
-			return path(new Point(start.x,start.y));
+			return path(new Point(start.getX(),start.getX()));
 		}
 		ArrayDeque<MapNode> q= new ArrayDeque<MapNode>();
 		q.add(start);
@@ -57,6 +64,10 @@ public class GameBoardTree {
 
 		return null;
 
+	}
+	
+	public String path(Point p){
+		return "";
 	}
 
 }
