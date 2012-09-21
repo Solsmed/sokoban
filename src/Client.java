@@ -18,7 +18,7 @@ public class Client {
 		try {
 			String lLine;
 			int lNumRows=0;
- 
+ //
 			br = new BufferedReader(new FileReader("Maps/"+fileName));
 			String[] lBoard = null;
 			while(lNumRows==0&&(lLine = br.readLine()) != null){
