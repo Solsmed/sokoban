@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 public class TempGameBoard {
 	HashSet<Character> moveable;
-	
+/*	
 	// checking if player can walk backwards i.e there is a empty square behind player in any direction
 	//return is an array of all possible direction one can walk
 	public ArrayList<MapNode> canWalk(){
@@ -155,5 +155,5 @@ public class TempGameBoard {
 			return true;
 		}
 		return false;
-	}
+	}*/
 }
