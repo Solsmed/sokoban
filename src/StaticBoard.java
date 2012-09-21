@@ -30,7 +30,7 @@ public class StaticBoard {
 		try {
 			return goal[x][y];
 		} catch (ArrayIndexOutOfBoundsException e) {
-			System.err.println("isGoal(): no such position. " + p + ", board size: " + xSize + "," + ySize);
+			System.err.println("isGoal(): no such position. " + new Point (x,y) + ", board size: " + xSize + "," + ySize);
 			return false;
 		}
 	}
