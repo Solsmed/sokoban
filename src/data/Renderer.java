@@ -1,3 +1,4 @@
+package data;
 
 public class Renderer {
 	public static void draw(GameBoard b) {

@@ -1,3 +1,4 @@
+package data;
 
 public class Move {
 	private Point position;

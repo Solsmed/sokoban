@@ -1,4 +1,10 @@
+package search;
+
 import java.util.*;
+
+import data.GameBoard;
+import data.GameBoardNode;
+import data.GameBoardTree;
 
 public class TreeSearcher {
 	private List<GameBoardTree> treeList;

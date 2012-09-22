@@ -1,4 +1,10 @@
+package search;
+
+import data.*;
 import java.util.*;
+
+import data.GameBoard;
+import data.Point;
 
 public class MoveValidator {
 	static char[] directions ={'U','R','D','L'};

@@ -4,6 +4,10 @@ import java.net.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
+import data.GameBoard;
+
+import search.TreeSearcher;
+
 
 public class Client {
 	private static GameBoard gameBoard;

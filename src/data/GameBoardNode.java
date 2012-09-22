@@ -1,5 +1,8 @@
+package data;
 import java.util.Iterator;
 import java.util.Set;
+
+import search.MoveValidator;
 
 public class GameBoardNode {
 	private GameBoardTree tree;

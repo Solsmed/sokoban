@@ -1,3 +1,4 @@
+package data;
 
 public class Point implements Cloneable {
 	private int x;

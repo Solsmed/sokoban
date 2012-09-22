@@ -1,9 +1,10 @@
+package data;
 import java.util.*;
 
 public class GameBoard {
-	StaticBoard board;
-	ArrayList<Point> boxes;
-	Point player;
+	public StaticBoard board;
+	public ArrayList<Point> boxes;
+	public Point player;
 
 	Random random;
 

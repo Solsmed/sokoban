@@ -1,3 +1,4 @@
+package data;
 public class StaticBoard {
 	boolean[][] floor;
 	boolean[][] goal;
