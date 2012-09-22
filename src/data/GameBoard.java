@@ -15,7 +15,7 @@ public class GameBoard {
 
 	public GameBoard makeMove(Point movedBox, char dir){
 
-		// hitta o ers√§tt boxen som ska bytas ut
+		// hitta o ersätt boxen som ska bytas ut
 		for(Point box: boxes){
 			if(box.equals(movedBox)){
 				movedBox=movedBox.makeMove(dir);
