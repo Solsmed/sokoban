@@ -49,4 +49,8 @@ public class MoveValidator {
 		
 		return possibleEndBoards;
 	}
+	
+	public static char[] getPlayerMovementFor(GameBoard from, GameBoard to) {
+		return null;
+	}
 }
