@@ -5,14 +5,13 @@ public class GameBoardTree {
 	// A tree with all the permutations of boards, used in the BFS
 	GameBoardNode root;
 	
-	Set<GameBoardNode> nodeSet;
+	Set<GameBoard> nodeSet;
 	
 	public GameBoardTree(GameBoard rootGameBoard){
-		this.root = new GameBoardNode(null, rootGameBoard);
-		this.root.setTree(this);
+		this.root = new GameBoardNode(this, null, rootGameBoard, null);
 				
-		nodeSet = new HashSet<GameBoardNode>();
-		nodeSet.add(root);
+		nodeSet = new HashSet<GameBoard>();
+		nodeSet.add(root.gameBoard);
 	}
 		
 	public GameBoardNode getRoot() {
@@ -20,6 +19,6 @@ public class GameBoardTree {
 	}
 	
 	public void addNode(GameBoardNode node) {
-		nodeSet.add(node);
+		nodeSet.add(node.gameBoard);
 	}
 }

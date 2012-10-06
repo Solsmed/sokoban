@@ -2,7 +2,7 @@ package data;
 
 public class Renderer {
 	public static String draw(GameBoard b) {
-		char[][] map = new char[b.staticBoard.ySize][b.staticBoard.xSize];
+		char[] map = new char[StaticBoard.MAP_SIZE];
 		
 		/*
 		
@@ -19,53 +19,45 @@ public class Renderer {
 		
 		// Static stuff
 		
-		for(int y=0;y<b.staticBoard.ySize;y++){
-			for(int x=0;x<b.staticBoard.xSize;x++){
-				if(b.staticBoard.isFloor(x, y))
-					if(b.staticBoard.isGoal(x, y))
-						map[y][x] = '.';
-					else
-						map[y][x] = ' ';
-				else
-					map[y][x] = '#';
-			}
+		for(int p=0; p < StaticBoard.MAP_SIZE; p++){
+			if(StaticBoard.floor[p])
+				map[p] = ' ';
+			else
+				map[p] = '#';
 		}
 		
-		int psx = b.staticBoard.start.getX();
-		int psy = b.staticBoard.start.getY();
-		map[psy][psx] = 's';
+		for(int g = 0; g < StaticBoard.goalPositions.length; g++)
+			map[StaticBoard.goalPositions[g]] = '.';
+		
+		map[StaticBoard.start] = 's';
 		
 		
 		// Dynamic stuff
 		
-		int px = b.player.getX();
-		int py = b.player.getY();
-		if(map[py][px] == '.')
-			map[py][px] = '+';
+		if(map[b.playerPosition] == '.')
+			map[b.playerPosition] = '+';
 		else
-			map[py][px] = '@';
+			map[b.playerPosition] = '@';
 		
-		for(int i = 0; i < b.boxes.size(); i++) {
-			int bx = b.boxes.get(i).getX();
-			int by = b.boxes.get(i).getY();
+		for(int i = 0; i < b.boxPositions.length; i++) {
+			int boxPos = b.boxPositions[i];
 			
-			switch(map[by][bx]) {
+			switch(map[boxPos]) {
 			case ' ':
-				map[by][bx] = '$';
+				map[boxPos] = '$';
 				break;
 			case '.':
-				map[by][bx] = '*';
+				map[boxPos] = '*';
 				break;
 			}
 		}
 		
 		StringBuffer sb = new StringBuffer();
-		for(int y = 0; y < map.length; y++) {
-			sb.append(map[y]);
-			sb.append('\n');
+		for(int p = 0; p < map.length; p++) {
+			sb.append(map[p]);
+			if(p % StaticBoard.MAP_WIDTH == StaticBoard.MAP_WIDTH - 1)
+				sb.append('\n');
 		}
-		//System.out.println(sb.toString());
 		return sb.toString();
 	}
-
 }

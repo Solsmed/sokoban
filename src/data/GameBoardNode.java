@@ -1,6 +1,5 @@
 package data;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import search.MoveValidator;
@@ -10,18 +9,23 @@ public class GameBoardNode {
 	public GameBoardNode parent;
 	Set<GameBoardNode> children;
 	
+	public Move priorMove;
+	
 	public GameBoard gameBoard;
 	
-	public GameBoardNode(GameBoardNode parent, GameBoard gb) {
+	public GameBoardNode(GameBoardTree tree, GameBoardNode parent, GameBoard gb, Move move) {
 		gameBoard = gb;
 		this.parent = parent;
 		
+		priorMove = move;
+		
 		children = new HashSet<GameBoardNode>();
+		
+		this.tree = tree;
 	}
 	
-	public void setTree(GameBoardTree tree) {
-		if(parent == null)
-			this.tree = tree;
+	public GameBoardTree getTree() {
+		return tree;
 	}
 	
 	public Set<GameBoardNode> getChildren() {
@@ -29,26 +33,9 @@ public class GameBoardNode {
 	}
 	
 	public Set<GameBoardNode> spawnChildren() {
-		Set<GameBoard> newChildren = MoveValidator.getValidPermutations(gameBoard);
-		
-		Iterator<GameBoard> it = newChildren.iterator();
-		
-		while(it.hasNext()) {
-			GameBoardNode newNode = new GameBoardNode(this, it.next());
-			Renderer.draw(newNode.gameBoard);
-			if(!tree.nodeSet.contains(newNode)) {
-				children.add(newNode);
-				newNode.setTree(tree);
-				tree.nodeSet.add(newNode);
-			}
-		}
-		
+		children = MoveValidator.getValidAndNewPermutations(this, tree.nodeSet);
+
 		return getChildren();
-	}
-	
-	@Override
-	public int hashCode() {
-		return gameBoard.hashCode();
 	}
 	
 	/*

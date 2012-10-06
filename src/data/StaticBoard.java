@@ -1,43 +1,33 @@
 package data;
+
 public class StaticBoard {
-	boolean[][] floor;
-	boolean[][] goal;
-	int xSize;
-	int ySize;
-	Point start;
+	public static boolean[] floor;
+	public static int[] goalPositions;
+	public static int start;
 	
-	public StaticBoard(int xSize, int ySize){
-		this.xSize = xSize;
-		this.ySize = ySize;
-		this.floor = new boolean[xSize][ySize];
-		this.goal = new boolean[xSize][ySize];
-		this.start=null;
-	}
+	public static int MAP_WIDTH;
+	public static int MAP_HEIGHT;
+	public static int MAP_SIZE;
 	
-	public boolean isFloor(int x, int y) {
-		return isFloor(new Point(x, y));
-	}
+	public static int[] directions;
+	public static int UP;
+	public static int DOWN;
+	public static int LEFT;
+	public static int RIGHT;
 	
-	public boolean isFloor(Point p) {
-		try {
-			return floor[p.getX()][p.getY()];
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.err.println("isFloor(): no such position. " + p + ", board size: " + xSize + "," + ySize);
-			return false;
-		}
-	}
+	public static int NULL = -1;
 	
-	public boolean isGoal(int x,int y) {
-		try {
-			return goal[x][y];
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.err.println("isGoal(): no such position. " + new Point (x,y) + ", board size: " + xSize + "," + ySize);
-			return false;
-		}
-	}
-	
-	@Deprecated
-	public Point getSize() {
-		return new Point(xSize, ySize);
+	public static void init(int width, int height, int numGoals){
+		StaticBoard.MAP_WIDTH = width;
+		StaticBoard.MAP_HEIGHT = height;
+		MAP_SIZE = width * height;
+		floor = new boolean[width*height];
+		goalPositions = new int[numGoals];
+		start = NULL;
+		UP = -width;
+		DOWN = width;
+		LEFT = -1;
+		RIGHT = 1;
+		directions = new int[] {UP, RIGHT, DOWN, LEFT};
 	}
 }

@@ -1,33 +1,31 @@
 package data;
 
+
 public class Move {
-	private Point position;
-	private char direction;
+	private final int destination;
+	private final int originDirection;
 	
-	public Move(Point p, char dir){
-		direction = dir;
-		position = p;
+	/**
+	 * Final position is (position + direction)
+	 * 
+	 * @param p Origin position
+	 * @param dir Direction of movement
+	 */
+	
+	public Move(int destination, int originDirection){
+		this.destination = destination;
+		this.originDirection = originDirection;
 	}
 	
-	public Point makeMove(char c){
-		int xdiff = 0;
-		int ydiff = 0;
-		
-		switch(direction){
-		case 'U':
-			ydiff = -1;
-			break;
-		case 'R':
-			xdiff = 1;
-			break;
-		case 'D':
-			ydiff = 1;
-			break;
-		case 'L':
-			xdiff = -1;
-			break;
-			
-		}
-		return new Point(position.getX() + xdiff, position.getY() + ydiff);
+	public int getDestination() {
+		return destination;
+	}
+	
+	public int getSource() {
+		return destination - originDirection;
+	}
+	
+	public int getDirection() {
+		return originDirection;
 	}
 }
