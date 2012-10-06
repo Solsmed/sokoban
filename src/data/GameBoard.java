@@ -206,23 +206,23 @@ public class GameBoard {
 	}
 	//returns true if we can go from start point to goal point
 	public boolean goToPoint(int fromX, int fromY, int toX, int toY){
-		int start = fromY*staticBoard.getSize().getX() + fromX;
-		int goal = toY*staticBoard.getSize().getX()+toX;
+		int start = fromY*staticBoard.xSize + fromX;
+		int goal = toY*staticBoard.xSize+toX;
 		ArrayList<ArrayList<Integer>> neighbour = new ArrayList<ArrayList<Integer>>();
-		char[][] map=new char[staticBoard.getSize().getX()][staticBoard.getSize().getY()];
-		for (int i = 0; i < staticBoard.getSize().getX()*staticBoard.getSize().getY(); i++) {
+		char[][] map=new char[staticBoard.xSize][staticBoard.ySize];
+		for (int i = 0; i < staticBoard.xSize*staticBoard.ySize; i++) {
 			neighbour.add(new ArrayList<Integer>());
 		}
-		for (int i = 0; i < staticBoard.getSize().getX() - 1; i++) {
-			for (int j = 0; j < staticBoard.getSize().getY() - 1; j++) {
+		for (int i = 0; i < staticBoard.xSize - 1; i++) {
+			for (int j = 0; j < staticBoard.ySize - 1; j++) {
 				char current = map[i][j];
 				//check if neighbours to the right
 				if(current == ' ' || current == '.' || current == '+'|| current == '@') {
 					char next = map[i][j + 1];
 					if (next == ' ' || next == '.' || next == '+'|| next == '@') {
-						neighbour.get(i * staticBoard.getSize().getX() + j).add(i * staticBoard.getSize().getX() + j + 1);
+						neighbour.get(i * staticBoard.xSize + j).add(i * staticBoard.xSize + j + 1);
 						//add next as neighbour to current
-						neighbour.get(i * staticBoard.getSize().getX() + j + 1).add(i * staticBoard.getSize().getX() + j);
+						neighbour.get(i * staticBoard.xSize + j + 1).add(i * staticBoard.xSize + j);
 						//add current as neighbour to next
 					}
 				}
@@ -230,9 +230,9 @@ public class GameBoard {
 				if(current == ' ' || current == '.' || current == '+'|| current == '@') {
 					char down = map[i+1][j];
 					if (down == ' ' || down == '.' || down == '+'|| down == '@') {
-						neighbour.get(i * staticBoard.getSize().getX() + j).add((i+1)*staticBoard.getSize().getX() + j );
+						neighbour.get(i * staticBoard.xSize + j).add((i+1)*staticBoard.xSize + j );
 						//add next as neighbour to current
-						neighbour.get((i+1) * staticBoard.getSize().getX() + j).add(i * staticBoard.getSize().getX() + j );
+						neighbour.get((i+1) * staticBoard.xSize + j).add(i * staticBoard.xSize + j );
 						//add next as neighbour to current
 					}
 				}
