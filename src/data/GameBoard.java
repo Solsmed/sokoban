@@ -87,8 +87,10 @@ public class GameBoard {
 		// copy boxes and player into startBoard, mutate stuff and make endBoard
 		// let startBoard and endBoard point to the same StaticBoard as this instance.
 
-		int xSize = 0;
-		int ySize = 0;
+		int xSize = width;
+		int ySize = height;
+		playerHashTable =new int[xSize][ySize];
+		boxHashTable =new int[xSize][ySize];
 
 		for(int y = 0; y < ySize; y++)
 			for(int x = 0; x < xSize; x++) {
@@ -136,6 +138,10 @@ public class GameBoard {
 
 		// get the position the player would have if it moved top, then left
 		Point anchor = getAnchorPoint(player.getX(), player.getY());
+		if(playerHashTable==null){
+			System.out.println("OH OWWW spaghetios");
+		}
+		System.out.println(anchor);
 		int hashValue = playerHashTable[anchor.getX()][anchor.getY()];
 
 		for(int b = 0; b < boxes.size(); b++)
