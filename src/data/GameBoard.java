@@ -2,7 +2,6 @@ package data;
 import java.util.*;
 
 public class GameBoard {
-	//public StaticBoard staticBoard;
 	public static final int WALL = 0x23;	//	#
 	public static final int PLAYER = 0x40;	//	@
 	public static final int PLAYER_ON_GOAL_SQUARE = 0x2b;	//	+
@@ -35,15 +34,6 @@ public class GameBoard {
 			width = width < data[i].length() ? data[i].length() : width;
 		}
 
-		/*
-		int goalCount = 0;
-		for(int i = 0; i < data.length; i++) {
-			for(int c = 0; c < data[i].length(); c++) {
-				
-				count 
-			}
-		}
-		*/
 		Vector<Integer> goals = new Vector<Integer>();
 		Vector<Integer> boxes = new Vector<Integer>();
 		
@@ -65,18 +55,6 @@ public class GameBoard {
 			char[] lineData = data[y].toCharArray();
 			for(int x = 0; x < lineData.length; x++) {
 				
-				/*
-				
-				Wall					#	0x23
-				Player					@	0x40
-				Player on goal square	+	0x2b
-				Box						$	0x24
-				Box on goal				*	0x2a
-				Goal square				.	0x2e
-				Empty floor			(space)	0x20
-				Start					s	0x73
-				
-				 */
 				int p = y*StaticBoard.MAP_WIDTH+x;
 				
 				switch(lineData[x]) {
@@ -115,13 +93,6 @@ public class GameBoard {
 		}
 	}
 
-	/*
-	public void moveBox(int boxIndex, int dir){
-		boxPositions[boxIndex] += dir;
-		playerPosition=playerPosition + dir;
-	}
-	*/
-	
 	/**
 	 * @return This board but with all boxes on the goals and the player at start.
 	 */
@@ -199,13 +170,6 @@ public class GameBoard {
 		return p;
 	}
 
-	/*
-	private GameBoard update(Move m){
-		//use the makeMove-function in Move to change a move's direction
-		return null;
-	}
-	*/
-	
 	// TODO check and simplify with StaticBoard directions
 	//returns true if we can go from start point to goal point
 	public boolean hasFreePath(int from, int to){
