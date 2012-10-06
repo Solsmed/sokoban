@@ -4,12 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class GameBoardTest {
-	GameBoard miniBoard, smallBoard;
-	
+public class GameBoardTest {	
 	@Test
 	public void testGetAnchorPosition() {
-		miniBoard = new GameBoard(new String[] {
+		GameBoard miniBoard = new GameBoard(new String[] {
 				 "#####",
 				 "# $.#",
 				 "# * #",
@@ -18,7 +16,7 @@ public class GameBoardTest {
 		 });
 		assertTrue(miniBoard.getAnchorPosition(pos(2,3)) == pos(1,1));
 		
-		smallBoard = new GameBoard(new String[] {
+		GameBoard smallBoard = new GameBoard(new String[] {
 				" ######### ",
 				" #   #   # ",
 				" # @ #   # ",
@@ -30,8 +28,34 @@ public class GameBoardTest {
 		});
 		assertTrue(smallBoard.getAnchorPosition(pos(3,2)) == pos(2,1));
 		int anchor = smallBoard.getAnchorPosition(pos(7,1));
-		System.out.println(pos(anchor));
 		assertTrue(anchor == pos(2,1));
+	}
+	
+	@Test
+	public void testHasFreePath() {
+		GameBoard denseBoard = new GameBoard(new String[] {
+				"#######",
+				"##   ##",
+				"#  #  #",
+				"# ### #",
+				"# *#@ #",
+				"#######",
+		});
+		
+		assertTrue(denseBoard.hasFreePath(pos(4,4), pos(1,4)));
+
+		GameBoard smallBoard = new GameBoard(new String[] {
+				" ######### ",
+				" #   #   # ",
+				" # @ #   # ",
+				"## ** ** # ",
+				"#  #* *# ##",
+				"#  ** **  #",
+				"#         #",
+				"###########",
+		});
+		
+		assertTrue(smallBoard.hasFreePath(pos(6,2), pos(8,5)));
 	}
 	
 	private int pos(int x, int y) {
