@@ -1,8 +1,5 @@
-import java.awt.Point;
 import java.io.*;
 import java.net.*;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
 
 import data.GameBoard;
 
@@ -68,8 +65,7 @@ public class Client {
 			//read number of rows
 			int lNumRows=Integer.parseInt(lLine);
 			lLine=lIn.readLine();
-			int lNumCols=lLine.length();
-			String[] lBoard = null;
+			String[] lBoard = new String[lNumRows];
 
 			//read each row
 			//agent.readFromFile("test_board_1");
@@ -85,27 +81,6 @@ public class Client {
 			//here, we would store the row somewhere, to build our board
 			//in this demo, we just print it
 			System.out.println(lLine);
-			//System.out.println(agent.BFS());
-			//String path=agent.gameBoard.BFS();
-			//System.out.println(path);
-			//if(path==null)
-			//	path="";
-			//now, we should find a path from the player to any goal
-
-			//we've found our solution
-			//String lMySol="U R R U U L D L L U L L D R R R R L D D R U R U D L L U R";
-			//these formats are also valid:
-			//String lMySol="URRUULDLLULLDRRRRLDDRURUDLLUR";
-			//String lMySol="0 3 3 0 0 2 1 2 2 0 2 2 1 3 3 3 3 2 1 1 3 0 3 0 1 2 2 0 3";
-
-			//send the solution to the server
-			//lOut.println(path);
-			//lOut.flush();
-
-			//read answer from the server
-			//lLine=lIn.readLine();
-
-			//System.out.println(lLine);
 		}
 		catch(Throwable t)
 		{
