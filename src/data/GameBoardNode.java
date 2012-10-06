@@ -50,7 +50,10 @@ public class GameBoardNode {
 	*/
 	
 	public boolean equals(Object obj) {
-		return hashCode() == obj.hashCode();
+		if (obj instanceof GameBoardNode)
+			return gameBoard.equals(((GameBoardNode)obj).gameBoard);
+		
+		return false;
 		/*
 		if(this == obj)
 			return true;

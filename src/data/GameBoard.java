@@ -265,4 +265,12 @@ public class GameBoard {
 	public String toString() {
 		return Renderer.draw(this);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof GameBoard)
+			return hashCode() == ((GameBoard)obj).hashCode();
+		
+		return false;
+	}
 }
