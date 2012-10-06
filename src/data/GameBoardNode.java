@@ -7,13 +7,14 @@ import search.MoveValidator;
 
 public class GameBoardNode {
 	private GameBoardTree tree;
-	GameBoardNode parent;
+	public GameBoardNode parent;
 	Set<GameBoardNode> children;
 	
 	public GameBoard gameBoard;
 	
 	public GameBoardNode(GameBoardNode parent, GameBoard gb) {
 		gameBoard = gb;
+		this.parent = parent;
 		
 		children = new HashSet<GameBoardNode>();
 	}

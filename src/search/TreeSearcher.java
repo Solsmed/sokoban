@@ -5,6 +5,7 @@ import java.util.*;
 import data.GameBoard;
 import data.GameBoardNode;
 import data.GameBoardTree;
+import data.Renderer;
 
 public class TreeSearcher {
 	private List<GameBoardTree> treeList;
@@ -38,9 +39,14 @@ public class TreeSearcher {
 			GameBoardNode node = bfsQueue.poll();
 			
 			if(node.equals(start)){
-			
-				return new LinkedList<GameBoard>();
-				
+				List<GameBoard> goalPath = new LinkedList<GameBoard>();
+				GameBoardNode currentNode = node;
+				while(currentNode != null) {
+					Renderer.draw(currentNode.gameBoard);
+					goalPath.add(currentNode.gameBoard);
+					currentNode = currentNode.parent;
+				}
+				return goalPath;
 			}
 				
 			
