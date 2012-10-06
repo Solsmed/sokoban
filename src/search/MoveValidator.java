@@ -10,17 +10,14 @@ public class MoveValidator {
 	static char[] directions ={'U','R','D','L'};
 	public static Set<GameBoard> getValidPermutations(GameBoard b) {
 		HashSet<GameBoard> validPermutations = new HashSet<GameBoard>();
-		ArrayList<Point> boxes = b.boxes;
-		for(Point box : boxes){
+		GameBoard newboard=new GameBoard(b);
+		ArrayList<Point> boxes = newboard.boxes;
+		for(int i=0;i<boxes.size();i++){
 			for(char direction: directions){
-				if(b.canPull(box,direction)){
-					GameBoard newboard=new GameBoard(b);
-					Renderer.draw(newboard);
-					System.out.println("BOARD B4");
-					validPermutations.add(newboard.makeMove(box, direction));
-					System.out.println("BOARD AFTER");
-					Renderer.draw(newboard);
-					
+				if(newboard.canPull(boxes.get(i),direction)){
+				
+					newboard.makeMove(boxes.get(i),i, direction);
+					validPermutations.add(newboard);					
 				}
 			}
 		}
@@ -44,8 +41,6 @@ public class MoveValidator {
 			for(int d = 0; d < dx.length; d++) {
 				if(board.isWalkable(bx+dx[d],by+dy[d])) {
 					GameBoard newBoard = new GameBoard(board);
-					Renderer.draw(newBoard);
-					System.out.println("BOARD B4");
 					newBoard.player = new Point(bx+dx[d],by+dy[d]);
 					possibleEndBoards.add(newBoard);
 				}

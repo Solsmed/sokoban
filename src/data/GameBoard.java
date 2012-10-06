@@ -13,19 +13,20 @@ public class GameBoard {
 
 	
 
-	public GameBoard makeMove(Point movedBox, char dir){
+	public void makeMove(Point movedBox,int pos, char dir){
 
 		// hitta o ersätt boxen som ska bytas ut
 		for(Point box: boxes){
 			if(box.equals(movedBox)){
 				movedBox=movedBox.makeMove(dir);
+//				boxes.get(pos)=movesBox;
+				boxes.set(pos, movedBox);
 			}
 		}
 		player=player.makeMove(dir);
 		
 		
-		
-		return this;		
+			
 	}
 	
 	public GameBoard getEndBoard(){
@@ -138,10 +139,7 @@ public class GameBoard {
 
 		// get the position the player would have if it moved top, then left
 		Point anchor = getAnchorPoint(player.getX(), player.getY());
-		if(playerHashTable==null){
-			System.out.println("OH OWWW spaghetios");
-		}
-		System.out.println(anchor);
+
 		int hashValue = playerHashTable[anchor.getX()][anchor.getY()];
 
 		for(int b = 0; b < boxes.size(); b++)

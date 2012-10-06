@@ -10,7 +10,7 @@ public class GameBoardNode {
 	GameBoardNode parent;
 	Set<GameBoardNode> children;
 	
-	GameBoard gameBoard;
+	public GameBoard gameBoard;
 	
 	public GameBoardNode(GameBoardNode parent, GameBoard gb) {
 		gameBoard = gb;
