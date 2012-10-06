@@ -10,8 +10,9 @@ public class GameBoardTree {
 	public GameBoardTree(GameBoard rootGameBoard){
 		this.root = new GameBoardNode(null, rootGameBoard);
 		this.root.setTree(this);
-		
+				
 		nodeSet = new HashSet<GameBoardNode>();
+		nodeSet.add(root);
 	}
 		
 	public GameBoardNode getRoot() {
