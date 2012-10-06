@@ -176,7 +176,7 @@ public class GameBoard {
 					if(ny>=0 && ny<board.ySize)
 						if(!visited[nx][ny])
 							if(isWalkable(nx, ny)) {
-								queue.add(new Point(x+dx[d],y+dx[d]));
+								queue.add(new Point(x+dx[d],y+dy[d]));
 								if(y < minY) {
 									minY = y;
 									minX = x;
