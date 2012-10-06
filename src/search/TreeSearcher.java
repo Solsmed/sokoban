@@ -36,11 +36,9 @@ public class TreeSearcher {
 		
 		while(!bfsQueue.isEmpty()) {
 			GameBoardNode node = bfsQueue.poll();
-			System.out.println(node.gameBoard.boxes);
-			System.out.println(node.gameBoard.player);
 			
 			if(node.equals(start)){
-				System.out.println("YES VI VINNER");
+			
 				return new LinkedList<GameBoard>();
 				
 			}
