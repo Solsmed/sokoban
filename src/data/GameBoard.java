@@ -138,36 +138,33 @@ public class GameBoard {
 		int minY = fromPos / StaticBoard.MAP_WIDTH;
 
 		int currentPos;
-		int p;
 		// find minY
 		while(!queue.isEmpty()) {
 			currentPos = queue.poll();
 
-			p = currentPos;
-
-			visited[p] = true;
+			visited[currentPos] = true;
 		
 			for(int m = 0; m < StaticBoard.directions.length; m++) {
-				int newp = p+StaticBoard.directions[m];
+				int newp = currentPos + StaticBoard.directions[m];
 				if(newp >= 0 && newp < StaticBoard.MAP_SIZE)
 					if(!visited[newp])
 						if(isWalkable(newp)) {
 							queue.add(newp);
 							if(newp / StaticBoard.MAP_WIDTH < minY) {
-								minX = fromPos % StaticBoard.MAP_WIDTH;
-								minY = fromPos / StaticBoard.MAP_WIDTH;
+								minX = newp % StaticBoard.MAP_WIDTH;
+								minY = newp / StaticBoard.MAP_WIDTH;
 							}
 						}
 			}
 		}
 
 		// find min x
-		p = minY*StaticBoard.MAP_WIDTH + minX;
-		while(StaticBoard.floor[p + StaticBoard.LEFT]) {
-			p = p + StaticBoard.LEFT;
+		currentPos = minY*StaticBoard.MAP_WIDTH + minX;
+		while(StaticBoard.floor[currentPos + StaticBoard.LEFT]) {
+			currentPos = currentPos + StaticBoard.LEFT;
 		}
 
-		return p;
+		return currentPos;
 	}
 
 	// TODO check and simplify with StaticBoard directions

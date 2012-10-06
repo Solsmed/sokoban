@@ -7,20 +7,22 @@ import org.junit.Test;
 
 public class GameBoardTest {
 	String[] map;
+	GameBoard board;
 	
 	@Before
 	public void setUp() throws Exception {
 		map = new String[] {
 				 "#####",
-				 "#  .#",
+				 "# $.#",
 				 "# * #",
 				 "#@  #",
 				 "#####"};
 		
-		GameBoard board = new GameBoard(map);
+		board = new GameBoard(map);
 	}
 
 	@Test
-	
-
+	public void testGetAnchorPosition() {
+		assertTrue(board.getAnchorPosition(16) == 6);
+	}
 }
