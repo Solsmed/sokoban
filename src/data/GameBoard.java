@@ -153,6 +153,10 @@ public class GameBoard {
 							if(newp / StaticBoard.MAP_WIDTH < minY) {
 								minX = newp % StaticBoard.MAP_WIDTH;
 								minY = newp / StaticBoard.MAP_WIDTH;
+							} else if (newp / StaticBoard.MAP_WIDTH == minY &&
+									   newp % StaticBoard.MAP_WIDTH < minX) {
+								minX = newp % StaticBoard.MAP_WIDTH;
+								minY = newp / StaticBoard.MAP_WIDTH;
 							}
 						}
 			}

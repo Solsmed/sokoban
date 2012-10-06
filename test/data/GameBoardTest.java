@@ -6,23 +6,40 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class GameBoardTest {
-	String[] map;
-	GameBoard board;
+	GameBoard miniBoard, smallBoard;
 	
-	@Before
-	public void setUp() throws Exception {
-		map = new String[] {
+	@Test
+	public void testGetAnchorPosition() {
+		miniBoard = new GameBoard(new String[] {
 				 "#####",
 				 "# $.#",
 				 "# * #",
 				 "#@  #",
-				 "#####"};
+				 "#####"
+		 });
+		assertTrue(miniBoard.getAnchorPosition(pos(2,3)) == pos(1,1));
 		
-		board = new GameBoard(map);
+		smallBoard = new GameBoard(new String[] {
+				" ######### ",
+				" #   #   # ",
+				" # @ #   # ",
+				"## ** ** # ",
+				"#  #* *# ##",
+				"#  ** **  #",
+				"#         #",
+				"###########",
+		});
+		assertTrue(smallBoard.getAnchorPosition(pos(3,2)) == pos(2,1));
+		int anchor = smallBoard.getAnchorPosition(pos(7,1));
+		System.out.println(pos(anchor));
+		assertTrue(anchor == pos(2,1));
 	}
-
-	@Test
-	public void testGetAnchorPosition() {
-		assertTrue(board.getAnchorPosition(16) == 6);
+	
+	private int pos(int x, int y) {
+		return y*StaticBoard.MAP_WIDTH + x;
+	}
+	
+	private String pos(int p) {
+		return (p % StaticBoard.MAP_WIDTH) + "," + (p / StaticBoard.MAP_WIDTH);
 	}
 }
