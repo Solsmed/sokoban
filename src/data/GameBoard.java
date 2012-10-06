@@ -2,7 +2,7 @@ package data;
 import java.util.*;
 
 public class GameBoard {
-	public StaticBoard board;
+	public StaticBoard staticBoard;
 	public ArrayList<Point> boxes;
 	public Point player;
 
@@ -31,9 +31,9 @@ public class GameBoard {
 	
 	public GameBoard getEndBoard(){
 		ArrayList<Point> goalBoxPositions= new ArrayList<Point>();
-		for(int i=0;i<board.ySize;i++){
-			for(int k=0; k<board.xSize;k++){
-				if(board.isGoal(k,i)==true){
+		for(int i=0;i<staticBoard.ySize;i++){
+			for(int k=0; k<staticBoard.xSize;k++){
+				if(staticBoard.isGoal(k,i)==true){
 					goalBoxPositions.add(new Point(k,i));
 				}
 				
@@ -41,7 +41,7 @@ public class GameBoard {
 		}
 		
 		GameBoard newBoard = new GameBoard(this,goalBoxPositions);
-		newBoard.board = board;
+		newBoard.staticBoard = staticBoard;
 		
 		return newBoard;
 	}
@@ -56,7 +56,7 @@ public class GameBoard {
 	}
 
 	public GameBoard(GameBoard old,ArrayList<Point> goalBoxPositions){
-		this.board=old.board;
+		this.staticBoard=old.staticBoard;
 		this.boxes=cloneList(goalBoxPositions);
 		this.player=old.player.clone();
 		this.boxHashTable=old.boxHashTable;
@@ -64,7 +64,7 @@ public class GameBoard {
 		
 	}
 	public GameBoard(GameBoard old){
-		this.board=old.board;
+		this.staticBoard=old.staticBoard;
 		this.boxes=cloneList(old.boxes);
 		this.player=old.player.clone();
 		this.boxHashTable=old.boxHashTable;
@@ -82,7 +82,7 @@ public class GameBoard {
 			width = width < data[i].length() ? data[i].length() : width;
 		}
 		
-		board = new StaticBoard(width, height);
+		staticBoard = new StaticBoard(width, height);
 		
 		// parse string and create board
 		// copy boxes and player into startBoard, mutate stuff and make endBoard
@@ -104,22 +104,22 @@ public class GameBoard {
 			for(int x = 0; x < lineData.length; x++) {
 				switch(lineData[x]) {
 				case 0x2b:
-					board.goal[x][y] = true;
+					staticBoard.goal[x][y] = true;
 				case 0x40:
 					player = new Point(x, y);
-					board.start = new Point(x, y);
+					staticBoard.start = new Point(x, y);
 				case 0x20:
-					board.floor[x][y] = true;
+					staticBoard.floor[x][y] = true;
 					break;
 				case 0x2a:
 					boxes.add(new Point(x, y));
 				case 0x2e:
-					board.goal[x][y] = true;
-					board.floor[x][y] = true;
+					staticBoard.goal[x][y] = true;
+					staticBoard.floor[x][y] = true;
 					break;
 				case 0x24:
 					boxes.add(new Point(x, y));
-					board.floor[x][y] = true;
+					staticBoard.floor[x][y] = true;
 					break;
 				}
 			}
@@ -149,7 +149,7 @@ public class GameBoard {
 	}
 
 	private Point getAnchorPoint(int fromX, int fromY) {
-		boolean visited[][] = new boolean[board.xSize][board.ySize];
+		boolean visited[][] = new boolean[staticBoard.xSize][staticBoard.ySize];
 
 		Queue<Point> queue = new LinkedList<Point>();
 
@@ -176,8 +176,8 @@ public class GameBoard {
 			for(int d = 0; d < dx.length; d++) {
 				int nx = x+dx[d];
 				int ny = y+dy[d];
-				if(nx>=0 && nx<board.xSize) {
-					if(ny>=0 && ny<board.ySize)
+				if(nx>=0 && nx<staticBoard.xSize) {
+					if(ny>=0 && ny<staticBoard.ySize)
 						if(!visited[nx][ny])
 							if(isWalkable(nx, ny)) {
 								queue.add(new Point(x+dx[d],y+dy[d]));
@@ -193,7 +193,7 @@ public class GameBoard {
 		// find min x
 		x = minX;
 		y = minY;
-		while(board.isFloor(x - 1, y)) {
+		while(staticBoard.isFloor(x - 1, y)) {
 			minX = x = x - 1;
 		}
 
@@ -206,23 +206,23 @@ public class GameBoard {
 	}
 	//returns true if we can go from start point to goal point
 	public boolean goToPoint(int fromX, int fromY, int toX, int toY){
-		int start = fromY*board.getSize().getX() + fromX;
-		int goal = toY*board.getSize().getX()+toX;
+		int start = fromY*staticBoard.getSize().getX() + fromX;
+		int goal = toY*staticBoard.getSize().getX()+toX;
 		ArrayList<ArrayList<Integer>> neighbour = new ArrayList<ArrayList<Integer>>();
-		char[][] map=new char[board.getSize().getX()][board.getSize().getY()];
-		for (int i = 0; i < board.getSize().getX()*board.getSize().getY(); i++) {
+		char[][] map=new char[staticBoard.getSize().getX()][staticBoard.getSize().getY()];
+		for (int i = 0; i < staticBoard.getSize().getX()*staticBoard.getSize().getY(); i++) {
 			neighbour.add(new ArrayList<Integer>());
 		}
-		for (int i = 0; i < board.getSize().getX() - 1; i++) {
-			for (int j = 0; j < board.getSize().getY() - 1; j++) {
+		for (int i = 0; i < staticBoard.getSize().getX() - 1; i++) {
+			for (int j = 0; j < staticBoard.getSize().getY() - 1; j++) {
 				char current = map[i][j];
 				//check if neighbours to the right
 				if(current == ' ' || current == '.' || current == '+'|| current == '@') {
 					char next = map[i][j + 1];
 					if (next == ' ' || next == '.' || next == '+'|| next == '@') {
-						neighbour.get(i * board.getSize().getX() + j).add(i * board.getSize().getX() + j + 1);
+						neighbour.get(i * staticBoard.getSize().getX() + j).add(i * staticBoard.getSize().getX() + j + 1);
 						//add next as neighbour to current
-						neighbour.get(i * board.getSize().getX() + j + 1).add(i * board.getSize().getX() + j);
+						neighbour.get(i * staticBoard.getSize().getX() + j + 1).add(i * staticBoard.getSize().getX() + j);
 						//add current as neighbour to next
 					}
 				}
@@ -230,9 +230,9 @@ public class GameBoard {
 				if(current == ' ' || current == '.' || current == '+'|| current == '@') {
 					char down = map[i+1][j];
 					if (down == ' ' || down == '.' || down == '+'|| down == '@') {
-						neighbour.get(i * board.getSize().getX() + j).add((i+1)*board.getSize().getX() + j );
+						neighbour.get(i * staticBoard.getSize().getX() + j).add((i+1)*staticBoard.getSize().getX() + j );
 						//add next as neighbour to current
-						neighbour.get((i+1) * board.getSize().getX() + j).add(i * board.getSize().getX() + j );
+						neighbour.get((i+1) * staticBoard.getSize().getX() + j).add(i * staticBoard.getSize().getX() + j );
 						//add next as neighbour to current
 					}
 				}
@@ -246,7 +246,7 @@ public class GameBoard {
 		Queue<Integer> queue = new LinkedList<Integer>();
 		queue.add(start);
 		System.out.println(start);
-		boolean[] visited = new boolean[board.getSize().getX()*board.getSize().getY()];
+		boolean[] visited = new boolean[staticBoard.getSize().getX()*staticBoard.getSize().getY()];
 		visited[start]=true;
 		ArrayList<Integer> adjacent;
 		int current;
@@ -271,25 +271,25 @@ public class GameBoard {
 		int y=p.getY();
 		switch (direction) {
 		case 'U':
-			if (y < board.ySize && y > 1) {
+			if (y < staticBoard.ySize && y > 1) {
 				if (isWalkable(x,y-1)&&(isWalkable(x,y-2)))
 					return true;
 			}
 			break;
 		case 'R':
-			if (x < (board.xSize - 2) && x >= 0) {
+			if (x < (staticBoard.xSize - 2) && x >= 0) {
 				if (isWalkable(x+1,y)&&(isWalkable(x+2,y)))
 					return true;
 			}
 			break;
 		case 'D':
-			if (y < (board.ySize - 2) && y >= 0) {
+			if (y < (staticBoard.ySize - 2) && y >= 0) {
 				if (isWalkable(x,y+1)&&(isWalkable(x,y+2)))
 					return true;
 			}
 			break;
 		case 'L':
-			if (x < board.xSize && x > 1) {
+			if (x < staticBoard.xSize && x > 1) {
 				if (isWalkable(x-1,y)&&(isWalkable(x-2,y)))
 					return true;
 			}
@@ -300,7 +300,7 @@ public class GameBoard {
 	}
 
 	public boolean isWalkable(int x, int y) {
-		return board.isFloor(x, y) && !hasBox(x, y);
+		return staticBoard.isFloor(x, y) && !hasBox(x, y);
 	}
 
 	public boolean hasBox(int x, int y) {

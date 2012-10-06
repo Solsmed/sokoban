@@ -2,7 +2,7 @@ package data;
 
 public class Renderer {
 	public static void draw(GameBoard b) {
-		char[][] map = new char[b.board.ySize][b.board.xSize];
+		char[][] map = new char[b.staticBoard.ySize][b.staticBoard.xSize];
 		
 		/*
 		
@@ -19,10 +19,10 @@ public class Renderer {
 		
 		// Static stuff
 		
-		for(int y=0;y<b.board.ySize;y++){
-			for(int x=0;x<b.board.xSize;x++){
-				if(b.board.isFloor(x, y))
-					if(b.board.isGoal(x, y))
+		for(int y=0;y<b.staticBoard.ySize;y++){
+			for(int x=0;x<b.staticBoard.xSize;x++){
+				if(b.staticBoard.isFloor(x, y))
+					if(b.staticBoard.isGoal(x, y))
 						map[y][x] = '.';
 					else
 						map[y][x] = ' ';
@@ -31,8 +31,8 @@ public class Renderer {
 			}
 		}
 		
-		int psx = b.board.start.getX();
-		int psy = b.board.start.getY();
+		int psx = b.staticBoard.start.getX();
+		int psy = b.staticBoard.start.getY();
 		map[psy][psx] = 's';
 		
 		
