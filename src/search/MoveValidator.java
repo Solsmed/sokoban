@@ -1,6 +1,5 @@
 package search;
 
-import data.*;
 import java.util.*;
 
 import data.GameBoard;

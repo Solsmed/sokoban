@@ -24,10 +24,6 @@ public class GameBoardNode {
 			this.tree = tree;
 	}
 	
-	private GameBoardTree getTree() {
-		return getRoot().tree;
-	}
-		
 	public Set<GameBoardNode> getChildren() {
 		return children;
 	}
@@ -55,6 +51,7 @@ public class GameBoardNode {
 		return gameBoard.hashCode();
 	}
 	
+	/*
 	private GameBoardNode getRoot() {
 		GameBoardNode root = null;
 		
@@ -63,6 +60,7 @@ public class GameBoardNode {
 		
 		return root;
 	}
+	*/
 	
 	public boolean equals(Object obj) {
 		return hashCode() == obj.hashCode();

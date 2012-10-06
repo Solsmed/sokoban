@@ -194,10 +194,12 @@ public class GameBoard {
 		return new Point(x, y);
 	}
 
+	/*
 	private GameBoard update(Move m){
 		//use the makeMove-function in Move to change a move's direction
 		return null;
 	}
+	*/
 	
 	//returns true if we can go from start point to goal point
 	public boolean goToPoint(int fromX, int fromY, int toX, int toY){
