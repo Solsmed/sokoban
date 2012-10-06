@@ -1,7 +1,7 @@
 package data;
 
 public class Renderer {
-	public static void draw(GameBoard b) {
+	public static String draw(GameBoard b) {
 		char[][] map = new char[b.staticBoard.ySize][b.staticBoard.xSize];
 		
 		/*
@@ -64,7 +64,8 @@ public class Renderer {
 			sb.append(map[y]);
 			sb.append('\n');
 		}
-		System.out.println(sb.toString());
+		//System.out.println(sb.toString());
+		return sb.toString();
 	}
 
 }
