@@ -218,7 +218,6 @@ public class GameBoard {
 		}
 		Queue<Integer> queue = new LinkedList<Integer>();
 		queue.add(start);
-		System.out.println(start);
 		boolean[] visited = new boolean[StaticBoard.MAP_WIDTH*StaticBoard.MAP_HEIGHT];
 		visited[start]=true;
 		ArrayList<Integer> adjacent;
