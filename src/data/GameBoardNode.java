@@ -1,4 +1,5 @@
 package data;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ public class GameBoardNode {
 	public GameBoardNode(GameBoardNode parent, GameBoard gb) {
 		gameBoard = gb;
 		
-		children = null;
+		children = new HashSet<GameBoardNode>();
 	}
 	
 	public void setTree(GameBoardTree tree) {
