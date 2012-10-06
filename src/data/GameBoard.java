@@ -182,57 +182,31 @@ public class GameBoard {
 		
 		int start = fromY*StaticBoard.MAP_WIDTH + fromX;
 		int goal = toY*StaticBoard.MAP_WIDTH+toX;
-		ArrayList<ArrayList<Integer>> neighbour = new ArrayList<ArrayList<Integer>>();
-		char[][] map=new char[StaticBoard.MAP_WIDTH][StaticBoard.MAP_HEIGHT];
-		for (int i = 0; i < StaticBoard.MAP_WIDTH*StaticBoard.MAP_HEIGHT; i++) {
-			neighbour.add(new ArrayList<Integer>());
-		}
-		for (int i = 0; i < StaticBoard.MAP_WIDTH - 1; i++) {
-			for (int j = 0; j < StaticBoard.MAP_HEIGHT - 1; j++) {
-				char current = map[i][j];
-				//check if neighbours to the right
-				if(current == ' ' || current == '.' || current == '+'|| current == '@') {
-					char next = map[i][j + 1];
-					if (next == ' ' || next == '.' || next == '+'|| next == '@') {
-						neighbour.get(i * StaticBoard.MAP_WIDTH + j).add(i * StaticBoard.MAP_WIDTH + j + 1);
-						//add next as neighbour to current
-						neighbour.get(i * StaticBoard.MAP_WIDTH + j + 1).add(i * StaticBoard.MAP_WIDTH + j);
-						//add current as neighbour to next
-					}
-				}
-				//check if neighbours to under
-				if(current == ' ' || current == '.' || current == '+'|| current == '@') {
-					char down = map[i+1][j];
-					if (down == ' ' || down == '.' || down == '+'|| down == '@') {
-						neighbour.get(i * StaticBoard.MAP_WIDTH + j).add((i+1)*StaticBoard.MAP_WIDTH + j );
-						//add next as neighbour to current
-						neighbour.get((i+1) * StaticBoard.MAP_WIDTH + j).add(i * StaticBoard.MAP_WIDTH + j );
-						//add next as neighbour to current
-					}
-				}
 
-			}
-		}
+	
 		//BFS
 		if(start==goal){
 			return true;
 		}
 		Queue<Integer> queue = new LinkedList<Integer>();
 		queue.add(start);
-		boolean[] visited = new boolean[StaticBoard.MAP_WIDTH*StaticBoard.MAP_HEIGHT];
+		boolean[] visited = new boolean[StaticBoard.MAP_SIZE];
 		visited[start]=true;
-		ArrayList<Integer> adjacent;
 		int current;
 		while(!queue.isEmpty()){
 			current = queue.poll();
-			adjacent = neighbour.get(current);
-			for(int i:adjacent){
-				if(!visited[i]){
-					queue.add(i);
-					visited[i]=true;
-					if(i == goal){
+			
+//			adjacent = neighbour.get(current);
+			for(int dir=0;dir<StaticBoard.directions.length;dir++){
+				if(isWalkable(current+StaticBoard.directions[dir])){
+				if(!visited[current+StaticBoard.directions[dir]]){
+					queue.add(current+StaticBoard.directions[dir]);
+					visited[current+StaticBoard.directions[dir]]=true;
+					if(current+StaticBoard.directions[dir] == goal){
 						return true;
 					}
+
+				}
 				}
 			}
 		}
