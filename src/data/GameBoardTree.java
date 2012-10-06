@@ -7,10 +7,11 @@ public class GameBoardTree {
 	
 	Set<GameBoard> nodeSet;
 	
-	public GameBoardTree(GameBoard rootGameBoard){
+	public GameBoardTree(GameBoard rootGameBoard, Set<GameBoard> visitedBoardsSet){
 		this.root = new GameBoardNode(this, null, rootGameBoard, null);
 				
-		nodeSet = new HashSet<GameBoard>();
+		nodeSet = visitedBoardsSet;
+		
 		nodeSet.add(root.gameBoard);
 	}
 		

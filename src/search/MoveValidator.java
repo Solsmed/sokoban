@@ -1,6 +1,7 @@
 package search;
 
 import data.*;
+
 import java.util.*;
 
 import data.StaticBoard;
@@ -20,11 +21,11 @@ public class MoveValidator {
 					newBoard.boxPositions[b] += direction;
 					int newPlayerPosition = boxPos + 2*direction;
 					newBoard.playerPosition = newPlayerPosition;
-					
 					if(!existingNodes.contains(newBoard)) {
 						Move move = new Move(newPlayerPosition, direction);
 						GameBoardNode newNode = new GameBoardNode(bn.getTree(), bn, newBoard, move);
 						validPermutations.add(newNode);
+						existingNodes.add(newNode.gameBoard);
 					}
 				}
 			}
