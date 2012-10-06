@@ -29,7 +29,7 @@ public class Renderer {
 		for(int g = 0; g < StaticBoard.goalPositions.length; g++)
 			map[StaticBoard.goalPositions[g]] = '.';
 		
-		map[StaticBoard.start] = 's';
+		map[StaticBoard.startPosition] = 's';
 		
 		
 		// Dynamic stuff

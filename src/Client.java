@@ -33,7 +33,7 @@ public class Client {
 				lBoard[i] = lLine;
 			}
 			gameBoard = new GameBoard(lBoard);
-			TreeSearcher treeSearcher = new TreeSearcher(gameBoard);
+			TreeSearcher treeSearcher = new TreeSearcher(/*gameBoard*/);
 
 			treeSearcher.totalSearch();
 
@@ -75,7 +75,7 @@ public class Client {
 				lBoard[i] = lLine;
 			}
 			gameBoard = new GameBoard(lBoard);
-			TreeSearcher treeSearcher = new TreeSearcher(gameBoard);
+			TreeSearcher treeSearcher = new TreeSearcher(/*gameBoard*/);
 
 			treeSearcher.totalSearch();
 			//here, we would store the row somewhere, to build our board

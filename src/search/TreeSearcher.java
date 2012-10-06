@@ -7,16 +7,16 @@ import data.*;
 public class TreeSearcher {
 	private List<GameBoardTree> treeList;
 	private Set<GameBoard> roots;
-	private GameBoard start;
+	//private GameBoard start;
 	
 	GameBoard goal;
 	
 	PriorityQueue<GameBoardNode> bfsQueue;
 	Set<GameBoard> nodeSet;
 	
-	public TreeSearcher(GameBoard start) {
-		this.start = start;
-		roots = MoveValidator.getPossibleEndBoards(start.getEndBoard());
+	public TreeSearcher() {
+		//this.start = start;
+		roots = MoveValidator.getPossibleEndBoards(StaticBoard.startBoard.getEndBoard());
 		
 		treeList = new ArrayList<GameBoardTree>();
 		nodeSet = new HashSet<GameBoard>();
@@ -39,7 +39,7 @@ public class TreeSearcher {
 		while(!bfsQueue.isEmpty()) {
 			GameBoardNode node = bfsQueue.poll();
 			System.out.println(nodeSet.size());
-			if(node.gameBoard.equals(start)){
+			if(node.gameBoard.equals(StaticBoard.startBoard)){
 				List<GameBoard> goalPath = new LinkedList<GameBoard>();
 				GameBoardNode currentNode = node;
 				while(currentNode != null) {

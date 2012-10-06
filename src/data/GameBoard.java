@@ -37,7 +37,7 @@ public class GameBoard {
 		Vector<Integer> goals = new Vector<Integer>();
 		Vector<Integer> boxes = new Vector<Integer>();
 		
-		StaticBoard.init(width, height, 0);
+		StaticBoard.init(width, height, 0, null);
 		
 		// parse string and create board
 		// copy boxes and player into startBoard, mutate stuff and make endBoard
@@ -62,7 +62,7 @@ public class GameBoard {
 					goals.add(p);
 				case PLAYER:
 					playerPosition = p;
-					StaticBoard.start = p;
+					StaticBoard.startPosition = p;
 				case EMPTY_FLOOR:
 					StaticBoard.floor[p] = true;
 					break;
@@ -91,6 +91,8 @@ public class GameBoard {
 			boxPositions[i] = boxes.get(i);
 			StaticBoard.goalPositions[i] = goals.get(i);
 		}
+		
+		StaticBoard.startBoard = new GameBoard(this);
 	}
 
 	/**
@@ -100,7 +102,7 @@ public class GameBoard {
 		GameBoard newBoard = new GameBoard(this);
 		
 		System.arraycopy(StaticBoard.goalPositions, 0, newBoard.boxPositions, 0, StaticBoard.goalPositions.length);
-		playerPosition = StaticBoard.start;
+		playerPosition = StaticBoard.startPosition;
 
 		return newBoard;
 	}
