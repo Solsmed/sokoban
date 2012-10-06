@@ -10,66 +10,17 @@ public class GameBoardTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		map = new String[] {"#####",
+		map = new String[] {
+				 "#####",
 				 "#  .#",
 				 "# * #",
 				 "#@  #",
 				 "#####"};
+		
+		GameBoard board = new GameBoard(map);
 	}
 
 	@Test
-	public void testHashCode() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testMakeMove() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetEndBoard() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCloneList() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGameBoardGameBoardArrayListOfPoint() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGameBoardGameBoard() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGameBoardStringArray() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGoToPoint() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCanPull() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testIsWalkable() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testHasBox() {
-		fail("Not yet implemented");
-	}
+	
 
 }

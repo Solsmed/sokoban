@@ -127,7 +127,7 @@ public class GameBoard {
 		return hashValue;
 	}
 
-	private int getAnchorPosition(int fromPos) {
+	public int getAnchorPosition(int fromPos) {
 		boolean visited[] = new boolean[StaticBoard.MAP_SIZE];
 
 		Queue<Integer> queue = new LinkedList<Integer>();
