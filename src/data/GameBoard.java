@@ -59,17 +59,11 @@ public class GameBoard {
 		this.staticBoard=old.staticBoard;
 		this.boxes=cloneList(goalBoxPositions);
 		this.player=old.player.clone();
-		this.boxHashTable=old.boxHashTable;
-		this.playerHashTable=old.playerHashTable;	
-		
 	}
 	public GameBoard(GameBoard old){
 		this.staticBoard=old.staticBoard;
 		this.boxes=cloneList(old.boxes);
 		this.player=old.player.clone();
-		this.boxHashTable=old.boxHashTable;
-		this.playerHashTable=old.playerHashTable;	
-		
 	}
 	public GameBoard(String[] data) {
 		random = new Random();
@@ -204,6 +198,7 @@ public class GameBoard {
 		//use the makeMove-function in Move to change a move's direction
 		return null;
 	}
+	
 	//returns true if we can go from start point to goal point
 	public boolean goToPoint(int fromX, int fromY, int toX, int toY){
 		int start = fromY*staticBoard.xSize + fromX;
@@ -246,7 +241,7 @@ public class GameBoard {
 		Queue<Integer> queue = new LinkedList<Integer>();
 		queue.add(start);
 		System.out.println(start);
-		boolean[] visited = new boolean[staticBoard.getSize().getX()*staticBoard.getSize().getY()];
+		boolean[] visited = new boolean[staticBoard.xSize*staticBoard.ySize];
 		visited[start]=true;
 		ArrayList<Integer> adjacent;
 		int current;
