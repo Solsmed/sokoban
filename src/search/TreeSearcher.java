@@ -2,10 +2,7 @@ package search;
 
 import java.util.*;
 
-import data.GameBoard;
-import data.GameBoardNode;
-import data.GameBoardTree;
-import data.Renderer;
+import data.*;
 
 public class TreeSearcher {
 	private List<GameBoardTree> treeList;
@@ -14,7 +11,7 @@ public class TreeSearcher {
 	
 	GameBoard goal;
 	
-	Queue<GameBoardNode> bfsQueue;
+	PriorityQueue<GameBoardNode> bfsQueue;
 	Set<GameBoard> nodeSet;
 	
 	public TreeSearcher(GameBoard start) {
@@ -29,7 +26,8 @@ public class TreeSearcher {
 			System.out.println("Created a root");
 		}
 		
-		bfsQueue = new LinkedList<GameBoardNode>();
+		Comparator<GameBoardNode> comparator = new GameBoardNodeComparator("Y3"); 
+		bfsQueue = new PriorityQueue<GameBoardNode>(64*1024, comparator);
 	}
 	
 	public List<GameBoard> totalSearch() {
