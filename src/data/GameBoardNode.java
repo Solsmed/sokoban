@@ -39,6 +39,7 @@ public class GameBoardNode {
 		
 		while(it.hasNext()) {
 			GameBoardNode newNode = new GameBoardNode(this, it.next());
+			Renderer.draw(newNode.gameBoard);
 			if(!tree.nodeSet.contains(newNode)) {
 				children.add(newNode);
 				newNode.setTree(tree);

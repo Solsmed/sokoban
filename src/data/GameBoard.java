@@ -310,4 +310,9 @@ public class GameBoard {
 		}
 		return false;
 	}
+	
+	@Override
+	public String toString() {
+		return Renderer.draw(this);
+	}
 }
