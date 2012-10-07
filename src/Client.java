@@ -46,7 +46,7 @@ public class Client {
 	public static void main(String[] pArgs) 
 	{
 		Client agent= new Client();
-		agent.readFromFile("test_board_5");
+		agent.readFromFile("test_board_6");
 		if(pArgs.length<3)
 		{
 			System.out.println("usage: java Client host port boardnum");
