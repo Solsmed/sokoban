@@ -9,6 +9,8 @@ public class TreeSearcher {
 	private Set<GameBoard> roots;
 	//private GameBoard start;
 	
+	public static GameBoardNode currentNode;
+	
 	GameBoard goal;
 	
 	PriorityQueue<GameBoardNode> bfsQueue;
@@ -26,7 +28,7 @@ public class TreeSearcher {
 			System.out.println("Created a root");
 		}
 		
-		Comparator<GameBoardNode> comparator = new GameBoardNodeComparator("Y3"); 
+		Comparator<GameBoardNode> comparator = new GameBoardNodeComparator(); 
 		bfsQueue = new PriorityQueue<GameBoardNode>(64*1024, comparator);
 	}
 	
@@ -38,6 +40,7 @@ public class TreeSearcher {
 		
 		while(!bfsQueue.isEmpty()) {
 			GameBoardNode node = bfsQueue.poll();
+			currentNode = node;
 //			System.out.println(nodeSet.size());
 			if(node.gameBoard.equals(StaticBoard.startBoard)){
 				LinkedList<GameBoardNode> goalPath = new LinkedList<GameBoardNode>();
@@ -100,8 +103,5 @@ public class TreeSearcher {
 
 		}
 		return move;
-
-
 	}
-
 }
