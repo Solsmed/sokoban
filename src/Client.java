@@ -12,7 +12,7 @@ public class Client {
 		gameBoard = null;
 	}
 	//method that reads map from local file
-	public void readFromFile(String fileName){
+	public static void readFromFile(String fileName){
 		BufferedReader br = null;
 		try {
 			String lLine;
@@ -45,8 +45,7 @@ public class Client {
 
 	public static void main(String[] pArgs) 
 	{
-		Client agent= new Client();
-//		agent.readFromFile("test_board_6");
+		//Client.readFromFile("test_board_6");
 		if(pArgs.length<3)
 		{
 			System.out.println("usage: java Client host port boardnum");
