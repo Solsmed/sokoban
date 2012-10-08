@@ -42,7 +42,7 @@ public class Client {
 
 	public static void main(String[] pArgs) 
 	{
-		//Client.readFromFile("test_board_6");
+		Client.readFromFile("cosmonotes_15");
 		if(pArgs.length<3)
 		{
 			System.out.println("usage: java Client host port boardnum");

@@ -3,15 +3,25 @@ import java.util.Comparator;
 public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
 	private final int Y_CONDITION = 4;
 	
+	static double spentTime = 0;
+	static int counter = 0;
+	
 	public GameBoardNodeComparator() {
 		
 	}
 	
 	@Override
     public int compare(GameBoardNode a, GameBoardNode b) {
+		long start = System.currentTimeMillis();
+		counter++;
+		
 		GameBoardNode cn = TreeSearcher.currentNode;
 		Double aVal = 0.0;
 		Double bVal = 0.0;
+		//double aVal = 0;
+		//double bVal = 0;
+		
+		
 		String keyWord;
 		
 		switch(Y_CONDITION) {
@@ -21,6 +31,9 @@ public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
 				
 			// Every unplaced box
 			case 2:
+				//aVal = getNumPlacedBoxes(a.gameBoard);
+				//bVal = getNumPlacedBoxes(b.gameBoard);
+				
 				keyWord = "placed boxes";
 				aVal = (Double)a.cache.get(keyWord);
 				if(aVal == null) {
@@ -34,11 +47,15 @@ public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
 					a.cache.put(keyWord, bVal);
 				}
 				
+				
 			// Lexicographical order
 			case 3:
 				
 			// Sum of shortest Manhattan distances to goals
 			case 4:
+				//aVal = getManhattanSum(a.gameBoard);
+				//bVal = getManhattanSum(b.gameBoard);
+				
 				keyWord = "manhattan sum";
 				aVal = (Double)a.cache.get(keyWord);
 				if(aVal == null) {
@@ -62,6 +79,8 @@ public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
 				return 0;
 		}
 	
+		
+		spentTime += (System.currentTimeMillis() - start);
 
 		if (aVal > bVal)
             return -1;

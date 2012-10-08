@@ -83,6 +83,8 @@ public class TreeSearcher {
 			
 		}
 		System.out.println("OUTPUT STRING SIZE "+path.length());
+		System.out.println("Spent time comparing: " + GameBoardNodeComparator.spentTime + " seconds.");
+		System.out.println("Comparisons made: " + GameBoardNodeComparator.counter + ".");
 		return path;
 	}
 	public String boxMove(int direction){
