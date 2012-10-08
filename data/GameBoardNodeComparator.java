@@ -1,7 +1,7 @@
 import java.util.Comparator;
 
 public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
-	private final int Y_CONDITION = 2;
+	private final int Y_CONDITION = 4;
 	
 	public GameBoardNodeComparator() {
 		
