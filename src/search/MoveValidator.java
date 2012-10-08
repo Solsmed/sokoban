@@ -1,10 +1,11 @@
 package search;
 
+
 import data.*;
 
 import java.util.*;
-
 import data.StaticBoard;
+
 
 public class MoveValidator {
 	

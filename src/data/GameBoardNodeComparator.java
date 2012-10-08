@@ -1,5 +1,6 @@
 package data;
 
+
 import java.util.Comparator;
 
 import search.TreeSearcher;
