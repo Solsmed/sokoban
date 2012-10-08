@@ -1,5 +1,4 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 public class GameBoardNode {
@@ -9,9 +8,13 @@ public class GameBoardNode {
 	
 	public Move priorMove;
 	
+	Map<String, Object> cache;
+	
 	public GameBoard gameBoard;
 	
 	public GameBoardNode(GameBoardTree tree, GameBoardNode parent, GameBoard gb, Move move) {
+		cache = new HashMap<String, Object>();
+		
 		gameBoard = gb;
 		this.parent = parent;
 		
