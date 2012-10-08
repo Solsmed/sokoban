@@ -70,7 +70,8 @@ public class TreeSearcher {
 	String getPathLOL(LinkedList<GameBoardNode> transitionTables){
 		String path="";
 		System.out.println(StaticBoard.startPosition+" "+transitionTables.peekFirst().gameBoard.playerPosition);
-		path=path+MoveValidator.findPath(StaticBoard.startPosition, transitionTables.get(0).gameBoard.playerPosition, StaticBoard.startBoard);
+		path=path+MoveValidator.findPath(transitionTables.get(0).gameBoard.playerPosition,StaticBoard.startPosition , StaticBoard.startBoard);
+		System.out.println("START PATH "+path);
 		for(GameBoardNode node: transitionTables){
 			if(node.priorMove!=null){
 			path=path+boxMove(-node.priorMove.getDirection());
