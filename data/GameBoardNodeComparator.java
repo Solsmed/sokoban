@@ -22,12 +22,13 @@ public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
 			int aDone = 0;
 			int bDone = 0;
 			
-	        // TODO Boxes must not have identities, a box is a box, no matter what its index is
-	        for(int i = 0; i < a.gameBoard.boxPositions.length; i++) {
-	        	if(a.gameBoard.boxPositions[i] == StaticBoard.startBoard.boxPositions[i])
-	        		aDone++;
-	        	if(b.gameBoard.boxPositions[i] == StaticBoard.startBoard.boxPositions[i])
-	        		bDone++;
+	        for(int startBox = 0; startBox < a.gameBoard.boxPositions.length; startBox++) {
+	        	for(int box = 0; box < a.gameBoard.boxPositions.length; box++) {
+	        		if(a.gameBoard.boxPositions[box] == StaticBoard.startBoard.boxPositions[startBox])
+	        			aDone++;
+	        		if(b.gameBoard.boxPositions[box] == StaticBoard.startBoard.boxPositions[startBox])
+		        		bDone++;
+	        	}
 	        }
 	        
 			if (aDone > bDone)
