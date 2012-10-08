@@ -24,6 +24,7 @@ public class TreeSearcher {
 		for(GameBoard root : roots) {
 			treeList.add(new GameBoardTree(root, nodeSet));
 			System.out.println("Created a root");
+			
 		}
 		
 		Comparator<GameBoardNode> comparator = new GameBoardNodeComparator("Y3"); 
@@ -33,8 +34,10 @@ public class TreeSearcher {
 	public String totalSearch() {
 		bfsQueue.clear();
 		
-		for(GameBoardTree tree : treeList)
+		for(GameBoardTree tree : treeList){
 			bfsQueue.add(tree.getRoot());
+//			System.out.println(Renderer.draw((tree.getRoot().gameBoard)));
+		}
 		
 		while(!bfsQueue.isEmpty()) {
 			GameBoardNode node = bfsQueue.poll();
@@ -72,6 +75,7 @@ public class TreeSearcher {
 		System.out.println(StaticBoard.startPosition+" "+transitionTables.peekFirst().gameBoard.playerPosition);
 		path=path+MoveValidator.findPath(transitionTables.get(0).gameBoard.playerPosition,StaticBoard.startPosition , StaticBoard.startBoard);
 		System.out.println("START PATH "+path);
+		System.out.println("transptable size "+transitionTables.size());
 		for(GameBoardNode node: transitionTables){
 			if(node.priorMove!=null){
 			path=path+boxMove(-node.priorMove.getDirection());
@@ -79,6 +83,7 @@ public class TreeSearcher {
 			}
 			
 		}
+		System.out.println("OUTPUT STRING SIZE "+path.length());
 		return path;
 	}
 	public String boxMove(int direction){

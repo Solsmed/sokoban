@@ -16,8 +16,8 @@ public class GameBoard {
 
 	Random random;
 
-	private static long[] boxHashTable;
-	private static long[] playerHashTable;
+	private static int[] boxHashTable;
+	private static int[] playerHashTable;
 
 	public GameBoard(GameBoard old){
 		boxPositions = Arrays.copyOf(old.boxPositions,  old.boxPositions.length);
@@ -43,12 +43,12 @@ public class GameBoard {
 		// copy boxes and player into startBoard, mutate stuff and make endBoard
 		// let startBoard and endBoard point to the same StaticBoard as this instance.
 
-		playerHashTable =new long[StaticBoard.MAP_SIZE];
-		boxHashTable =new long[StaticBoard.MAP_SIZE];
+		playerHashTable =new int[StaticBoard.MAP_SIZE];
+		boxHashTable =new int[StaticBoard.MAP_SIZE];
 
 		for(int p = 0; p < StaticBoard.MAP_SIZE; p++) {
-			boxHashTable[p] = random.nextLong();
-			playerHashTable[p] = random.nextLong();
+			boxHashTable[p] = random.nextInt();
+			playerHashTable[p] = random.nextInt();
 		}
 		
 		for(int y = 0; y < data.length; y++) {
@@ -166,7 +166,7 @@ public class GameBoard {
 
 		// find min x
 		currentPos = minY*StaticBoard.MAP_WIDTH + minX;
-		while(StaticBoard.floor[currentPos + StaticBoard.LEFT]) {
+		while(isWalkable(currentPos + StaticBoard.LEFT)) {
 			currentPos = currentPos + StaticBoard.LEFT;
 		}
 
