@@ -16,16 +16,17 @@ public class MoveValidator {
 			for(int dir = 0; dir < StaticBoard.directions.length; dir++) {
 				int direction = StaticBoard.directions[dir];
 				if(bn.gameBoard.canPull(boxPos, direction)) {
-					
+					String path=findPath(bn.gameBoard.playerPosition,boxPos+direction,bn.gameBoard);
+//					System.out.println(path);
 					GameBoard newBoard = new GameBoard(bn.gameBoard);
 					newBoard.boxPositions[b] += direction;
 					int newPlayerPosition = boxPos + 2*direction;
 					newBoard.playerPosition = newPlayerPosition;
 					if(!existingNodes.contains(newBoard)) {
-						Move move = new Move(newPlayerPosition, direction);
+						Move move = new Move(newPlayerPosition,direction,path);
 						GameBoardNode newNode = new GameBoardNode(bn.getTree(), bn, newBoard, move);
 						validPermutations.add(newNode);
-						existingNodes.add(newNode.gameBoard);
+						existingNodes.add(newBoard);
 					}
 				}
 			}
@@ -73,5 +74,65 @@ public class MoveValidator {
 		
 		
 		return null;
+	}
+	
+	public static String findPath(int from,int to,GameBoard b){
+		int start=from;
+		
+		
+	
+		int goal=to;
+		
+		if(start==goal){
+			return "";
+		}
+		Queue<Integer> queue = new LinkedList<Integer>();
+		queue.add(start);
+		boolean[] visited = new boolean[StaticBoard.MAP_SIZE];
+		int[] path = new int[StaticBoard.MAP_SIZE];
+		path[start]=1000;
+		visited[start]=true;
+		int current;
+		while(!queue.isEmpty()){
+			current = queue.poll();
+			
+//			adjacent = neighbour.get(current);
+			for(int dir=0;dir<StaticBoard.directions.length;dir++){
+				int neighbour=current+StaticBoard.directions[dir];
+				if(b.isWalkable(neighbour)){
+				if(!visited[neighbour]){
+					queue.add(neighbour);
+					visited[neighbour]=true;
+					path[neighbour]=StaticBoard.directions[dir];
+					if(neighbour == goal){
+						return getPath(goal,path);
+					}
+
+				}
+				}
+			}
+		}
+		return "";
+		
+	}
+
+	private static String getPath(int goal, int[] path) {
+		int direction=-path[goal];
+		if(direction==-1000){
+			return "";
+		}
+		if(StaticBoard.UP==direction){
+			return"U"+getPath(goal+direction,path);
+		}
+		if(StaticBoard.RIGHT==direction){
+			return "R"+getPath(goal+direction,path);
+		}
+		if(StaticBoard.DOWN==direction){
+			return "D"+getPath(goal+direction,path);
+		}
+		if(StaticBoard.LEFT==direction){
+			return "L"+getPath(goal+direction,path);
+		}
+		return "";
 	}
 }

@@ -21,7 +21,7 @@ public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
         		bDone++;
         }
 
-        System.out.println(aDone + " vs " + bDone);
+//        System.out.println(aDone + " vs " + bDone);
         
 		if (aDone > bDone)
         {

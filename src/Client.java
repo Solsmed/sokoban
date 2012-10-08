@@ -35,7 +35,7 @@ public class Client {
 			gameBoard = new GameBoard(lBoard);
 			TreeSearcher treeSearcher = new TreeSearcher(/*gameBoard*/);
 
-			treeSearcher.totalSearch();
+			System.out.println(treeSearcher.totalSearch());
 
 			//System.out.println(lLine);
 		}catch(Exception e){
@@ -46,7 +46,7 @@ public class Client {
 	public static void main(String[] pArgs) 
 	{
 		Client agent= new Client();
-		agent.readFromFile("test_board_6");
+//		agent.readFromFile("test_board_6");
 		if(pArgs.length<3)
 		{
 			System.out.println("usage: java Client host port boardnum");
@@ -64,22 +64,30 @@ public class Client {
 
 			//read number of rows
 			int lNumRows=Integer.parseInt(lLine);
-			lLine=lIn.readLine();
 			String[] lBoard = new String[lNumRows];
 
 			//read each row
 			//agent.readFromFile("test_board_1");
 			for(int i=0;i<lNumRows;i++)
 			{
+				
 				lLine=lIn.readLine();
 				lBoard[i] = lLine;
+				System.out.println(lLine);
 			}
 			gameBoard = new GameBoard(lBoard);
 			TreeSearcher treeSearcher = new TreeSearcher(/*gameBoard*/);
 
-			treeSearcher.totalSearch();
+//			treeSearcher.totalSearch();
 			//here, we would store the row somewhere, to build our board
 			//in this demo, we just print it
+//			System.out.println(lLine);
+			String out=treeSearcher.totalSearch();
+			System.out.println(out);
+			lOut.println(out);
+			lOut.flush();
+			
+			lLine=lIn.readLine();
 			System.out.println(lLine);
 		}
 		catch(Throwable t)

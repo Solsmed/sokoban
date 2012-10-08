@@ -85,6 +85,11 @@ public class GameBoardTest {
 				"#         #",
 				"###########"
 			});
+		/*GameBoard board3 = new GameBoard(new String[] {
+				"#######",
+				"#  $. #",
+				"#.  $ #",
+				"#######"});*/
 		int hash1 = board.hashCode();		
 		
 		GameBoard board2 = new GameBoard(board);
