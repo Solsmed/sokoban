@@ -52,6 +52,8 @@ public class MoveValidator {
 				if(board.isWalkable(boxPos + StaticBoard.directions[dir])) {
 					GameBoard newBoard = new GameBoard(board);
 					newBoard.playerPosition = boxPos + StaticBoard.directions[dir];
+//					System.out.println("@ MOVEVALIDATOR ANCHOR POSITON" +newBoard.getAnchorPosition(newBoard.playerPosition)+" HASH VALUE "+newBoard.hashCode());
+//					System.out.println("@ MOVEVALIDATOR\n"+Renderer.draw(newBoard));
 					possibleEndBoards.add(newBoard);
 				}
 			}	
