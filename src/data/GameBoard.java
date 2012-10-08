@@ -16,8 +16,8 @@ public class GameBoard {
 
 	Random random;
 
-	private static int[] boxHashTable;
-	private static int[] playerHashTable;
+	private static long[] boxHashTable;
+	private static long[] playerHashTable;
 
 	public GameBoard(GameBoard old){
 		boxPositions = Arrays.copyOf(old.boxPositions,  old.boxPositions.length);
@@ -43,12 +43,12 @@ public class GameBoard {
 		// copy boxes and player into startBoard, mutate stuff and make endBoard
 		// let startBoard and endBoard point to the same StaticBoard as this instance.
 
-		playerHashTable =new int[StaticBoard.MAP_SIZE];
-		boxHashTable =new int[StaticBoard.MAP_SIZE];
+		playerHashTable =new long[StaticBoard.MAP_SIZE];
+		boxHashTable =new long[StaticBoard.MAP_SIZE];
 
 		for(int p = 0; p < StaticBoard.MAP_SIZE; p++) {
-			boxHashTable[p] = random.nextInt();
-			playerHashTable[p] = random.nextInt();
+			boxHashTable[p] = random.nextLong();
+			playerHashTable[p] = random.nextLong();
 		}
 		
 		for(int y = 0; y < data.length; y++) {
@@ -121,12 +121,12 @@ public class GameBoard {
 		// get the position the player would have if it moved top, then left
 		int anchor = getAnchorPosition(playerPosition);
 
-		int hashValue = playerHashTable[anchor];
+		long hashValue = playerHashTable[anchor];
 
 		for(int b = 0; b < boxPositions.length; b++)
 			hashValue ^= boxHashTable[boxPositions[b]];
 
-		return hashValue;
+		return (int)(hashValue % Integer.MAX_VALUE);
 	}
 
 	public int getAnchorPosition(int fromPos) {
