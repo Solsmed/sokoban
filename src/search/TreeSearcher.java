@@ -40,7 +40,7 @@ public class TreeSearcher {
 			GameBoardNode node = bfsQueue.poll();
 //			System.out.println(nodeSet.size());
 			if(node.gameBoard.equals(StaticBoard.startBoard)){
-				List<GameBoardNode> goalPath = new LinkedList<GameBoardNode>();
+				LinkedList<GameBoardNode> goalPath = new LinkedList<GameBoardNode>();
 				GameBoardNode currentNode = node;
 				while(currentNode != null) {
 					System.out.println(Renderer.draw(currentNode.gameBoard));
@@ -67,9 +67,9 @@ public class TreeSearcher {
 		
 		return "";
 	}
-	String getPathLOL(List<GameBoardNode> transitionTables){
+	String getPathLOL(LinkedList<GameBoardNode> transitionTables){
 		String path="";
-		System.out.println(StaticBoard.startPosition+" "+transitionTables.get(0).gameBoard.playerPosition);
+		System.out.println(StaticBoard.startPosition+" "+transitionTables.peekFirst().gameBoard.playerPosition);
 		path=path+MoveValidator.findPath(StaticBoard.startPosition, transitionTables.get(0).gameBoard.playerPosition, StaticBoard.startBoard);
 		for(GameBoardNode node: transitionTables){
 			if(node.priorMove!=null){
