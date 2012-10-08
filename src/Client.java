@@ -1,9 +1,6 @@
 import java.io.*;
 import java.net.*;
 
-import data.GameBoard;
-
-import search.TreeSearcher;
 
 
 public class Client {

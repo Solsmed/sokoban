@@ -1,5 +1,3 @@
-package data;
-
 import java.util.*;
 
 public class GameBoardTree {

@@ -1,9 +1,6 @@
-package data;
-
 import java.util.HashSet;
 import java.util.Set;
 
-import search.MoveValidator;
 
 public class GameBoardNode {
 	private GameBoardTree tree;

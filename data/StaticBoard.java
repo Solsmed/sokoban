@@ -1,6 +1,3 @@
-package data;
-
-
 public class StaticBoard {
 	public static boolean[] floor;
 	public static int[] goalPositions;

@@ -1,7 +1,3 @@
-package data;
-
-
-
 public class Move {
 	private final int destination;
 	private final int originDirection;

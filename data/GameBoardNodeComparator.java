@@ -1,9 +1,4 @@
-package data;
-
-
 import java.util.Comparator;
-
-import search.TreeSearcher;
 
 public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
 	private final int Y_CONDITION = 2;

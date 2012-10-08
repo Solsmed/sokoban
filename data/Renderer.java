@@ -1,6 +1,3 @@
-package data;
-
-
 public class Renderer {
 	public static String draw(GameBoard b) {
 		char[] map = new char[StaticBoard.MAP_SIZE];
