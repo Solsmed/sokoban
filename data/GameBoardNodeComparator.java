@@ -27,10 +27,10 @@ public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
 		
 		int compareResult = 0;
 		
-		if(xComparator.compare(a, b) >= 0)
-			compareResult = yComparator.compare(a, b);
-		
 		compareResult = xComparator.compare(a, b);
+		
+		if(compareResult >= 0)
+			compareResult = yComparator.compare(a, b);
 		
 		spentTime += (System.currentTimeMillis() - start);
 		
