@@ -17,7 +17,7 @@ public class MoveValidator {
 					int newPlayerPosition = boxPos + 2*direction;
 					newBoard.playerPosition = newPlayerPosition;
 					if(!existingNodes.contains(newBoard)) {
-						Move move = new Move(newPlayerPosition,direction,path);
+						Move move = new Move(newPlayerPosition,direction,path,b);
 						GameBoardNode newNode = new GameBoardNode(bn.getTree(), bn, newBoard, move);
 						validPermutations.add(newNode);
 						existingNodes.add(newBoard);
