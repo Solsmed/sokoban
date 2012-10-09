@@ -8,6 +8,7 @@ public class GameBoardNode {
 	
 	public Move priorMove;
 	
+	@Deprecated
 	Map<String, Object> cache;
 	
 	public GameBoard gameBoard;
