@@ -21,8 +21,6 @@ public class XComparator implements Comparator<GameBoardNode> {
 	}
 	
 	public int compare(GameBoardNode a, GameBoardNode b) {
-		int currentMovingBox;
-		
 		
 		switch(condition) {
 		case STOPMOVE_AFTER_EACH_STEP:
@@ -42,12 +40,13 @@ public class XComparator implements Comparator<GameBoardNode> {
 	}
 	
 	private int getMovingBoxIndex() {
+		int currentMovingBox;
 		Move m = TreeSearcher.currentNode.priorMove;
 		if(m != null)
 			currentMovingBox = m.getBoxIndex();
 		else
 			currentMovingBox = -1;
 		
-		
+		return currentMovingBox;
 	}
 }

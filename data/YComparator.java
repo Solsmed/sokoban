@@ -24,8 +24,6 @@ public class YComparator implements Comparator<GameBoardNode> {
 		String keyWord;
 		Double aVal = 0.0;
 		Double bVal = 0.0;		
-
-		
 		
 		switch(condition) {
 			// Every box
