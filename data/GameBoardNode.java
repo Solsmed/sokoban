@@ -7,6 +7,7 @@ public class GameBoardNode {
 	Set<GameBoardNode> children;
 	
 	public Move priorMove;
+	private int depth;
 	
 	@Deprecated
 	Map<String, Object> cache;
@@ -24,6 +25,11 @@ public class GameBoardNode {
 		children = new HashSet<GameBoardNode>();
 		
 		this.tree = tree;
+		
+		if(parent == null)
+			depth = 0;
+		else
+			depth = parent.depth + 1;
 	}
 	
 	public GameBoardTree getTree() {
@@ -38,6 +44,10 @@ public class GameBoardNode {
 		children = MoveValidator.getValidAndNewPermutations(this, tree.nodeSet);
 
 		return getChildren();
+	}
+	
+	public int getDepth() {
+		return depth;
 	}
 	
 	/*
