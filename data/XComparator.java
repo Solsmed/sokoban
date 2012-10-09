@@ -29,6 +29,9 @@ public class XComparator implements Comparator<GameBoardNode> {
 		int aBox = getMovingBoxIndex(offeredNode);
 		int bBox = getMovingBoxIndex(queuedNode);
 		
+		if(aBox == -1 || bBox == -1)
+			return 0;
+		
 		switch(condition) {
 		case STOPMOVE_AFTER_EACH_STEP:
 			return STOP;
@@ -60,6 +63,8 @@ public class XComparator implements Comparator<GameBoardNode> {
 	}
 	
 	private int getMovingBoxIndex(GameBoardNode node) {
+		if(node == null)
+			return -1;
 		int currentMovingBox;
 		Move m = node.priorMove;
 		if(m != null)

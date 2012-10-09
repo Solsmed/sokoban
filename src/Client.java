@@ -45,7 +45,7 @@ public class Client {
 		//Client.readFromFile("cosmonotes_15");
 		if(pArgs.length<4)
 		{
-			System.out.println("usage: java Client host port boardnum YCondition");
+			System.out.println("usage: java Client host port boardnum XCondition YCondition");
 			return;
 		}
 		try{
@@ -74,7 +74,9 @@ public class Client {
 			long start= System.nanoTime();
 			
 			gameBoard = new GameBoard(lBoard);
-			TreeSearcher treeSearcher = new TreeSearcher(Integer.parseInt(pArgs[3]));
+			int xc = Integer.parseInt(pArgs[3]);
+			int yc = Integer.parseInt(pArgs[4]);
+			TreeSearcher treeSearcher = new TreeSearcher(xc, yc);
 			String out=treeSearcher.totalSearch();
 			System.out.println("Solution 4 Took "+(float)((float)(System.nanoTime()-start)/1000000000)+" seconds");
 			start= System.nanoTime();

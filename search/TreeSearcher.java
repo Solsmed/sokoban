@@ -3,7 +3,7 @@ import java.util.*;
 public class TreeSearcher {
 	private List<GameBoardTree> treeList;
 	private Set<GameBoard> roots;
-	private int ycond=0;
+
 	//private GameBoard start;
 	
 	public static GameBoardNode currentNode;
@@ -13,9 +13,7 @@ public class TreeSearcher {
 	PriorityQueue<GameBoardNode> bfsQueue;
 	Set<GameBoard> nodeSet;
 	
-	public TreeSearcher(int ycond) {
-		this.ycond=ycond;
-		//this.start = start;
+	public TreeSearcher(int xcond, int ycond) {
 		roots = MoveValidator.getPossibleEndBoards(StaticBoard.startBoard.getEndBoard());
 		
 		treeList = new ArrayList<GameBoardTree>();
@@ -27,7 +25,7 @@ public class TreeSearcher {
 			
 		}
 		
-		Comparator<GameBoardNode> comparator = new GameBoardNodeComparator(this.ycond); 
+		Comparator<GameBoardNode> comparator = new GameBoardNodeComparator(xcond, ycond); 
 		bfsQueue = new PriorityQueue<GameBoardNode>(64*1024, comparator);
 	}
 	
