@@ -1,13 +1,14 @@
 import java.util.Comparator;
 
+
 public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
-	private final int Y_CONDITION = 4;
+	private static int Y_CONDITION = 4;
 	
 	static double spentTime = 0;
 	static int counter = 0;
 	
-	public GameBoardNodeComparator() {
-		
+	public GameBoardNodeComparator(int Y_CONDITION) {
+		this.Y_CONDITION=Y_CONDITION;
 	}
 	
 	@Override
@@ -47,11 +48,34 @@ public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
 					a.cache.put(keyWord, bVal);
 				}
 				
+				if (aVal > bVal)
+		            return -1;
+
+		        if (aVal < bVal)
+		            return 1;
+		        break;
+				
 				
 			// Lexicographical order
 			case 3:
 				
-			// Sum of shortest Manhattan distances to goals
+				int aDone = 0;
+				int bDone = 0;
+				 for(int i = 0; i < a.gameBoard.boxPositions.length; i++) {
+			        	if(a.gameBoard.boxPositions[i] == StaticBoard.startBoard.boxPositions[i])
+			        		aDone++;
+			        	if(b.gameBoard.boxPositions[i] == StaticBoard.startBoard.boxPositions[i])
+			        		bDone++;
+			        }
+			        
+					if (aDone > bDone)
+			        {
+			            return -1;
+			        }
+			        if (aDone < bDone)
+			        {
+			            return 1;
+			        }
 			case 4:
 				//aVal = getManhattanSum(a.gameBoard);
 				//bVal = getManhattanSum(b.gameBoard);
@@ -68,6 +92,11 @@ public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
 					bVal = getManhattanSum(b.gameBoard);
 					a.cache.put(keyWord, bVal);
 				}
+				if (aVal < bVal)
+		            return -1;
+
+		        if (aVal > bVal)
+		            return 1;
 	
 			// Box closest to target
 			case 5:

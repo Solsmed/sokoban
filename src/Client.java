@@ -30,9 +30,9 @@ public class Client {
 				lBoard[i] = lLine;
 			}
 			gameBoard = new GameBoard(lBoard);
-			TreeSearcher treeSearcher = new TreeSearcher(/*gameBoard*/);
+//			TreeSearcher treeSearcher = new TreeSearcher(/*gameBoard*/);
 
-			System.out.println(treeSearcher.totalSearch());
+//			System.out.println(treeSearcher.totalSearch());
 
 			//System.out.println(lLine);
 		}catch(Exception e){
@@ -43,9 +43,9 @@ public class Client {
 	public static void main(String[] pArgs) 
 	{
 		//Client.readFromFile("cosmonotes_15");
-		if(pArgs.length<3)
+		if(pArgs.length<4)
 		{
-			System.out.println("usage: java Client host port boardnum");
+			System.out.println("usage: java Client host port boardnum YCondition");
 			return;
 		}
 		try{
@@ -71,19 +71,32 @@ public class Client {
 				lBoard[i] = lLine;
 				System.out.println(lLine);
 			}
+			long start= System.nanoTime();
+			
 			gameBoard = new GameBoard(lBoard);
-			TreeSearcher treeSearcher = new TreeSearcher(/*gameBoard*/);
-
+			TreeSearcher treeSearcher = new TreeSearcher(Integer.parseInt(pArgs[3]));
+			String out=treeSearcher.totalSearch();
+			System.out.println("Solution 4 Took "+(float)((float)(System.nanoTime()-start)/1000000000)+" seconds");
+			start= System.nanoTime();
+//			treeSearcher = new TreeSearcher(2);
+//			out=treeSearcher.totalSearch();
+//			System.out.println("Solution 3 Took "+(float)((float)(System.nanoTime()-start)/1000000000)+" seconds");
+			start= System.nanoTime();
+//			treeSearcher = new TreeSearcher(3);
+//			out=treeSearcher.totalSearch();
+//			System.out.println("Solution 2 Took "+(float)((float)(System.nanoTime()-start)/1000000000)+" seconds");
 //			treeSearcher.totalSearch();
 			//here, we would store the row somewhere, to build our board
 			//in this demo, we just print it
 //			System.out.println(lLine);
-			String out=treeSearcher.totalSearch();
+//			String out=treeSearcher.totalSearch();
+			
 			System.out.println(out);
 			lOut.println(out);
 			lOut.flush();
 			
 			lLine=lIn.readLine();
+//			System.out.println("Solution Took "+(float)((System.nanoTime()-start)/1000000000)+" seconds");
 			System.out.println(lLine);
 		}
 		catch(Throwable t)

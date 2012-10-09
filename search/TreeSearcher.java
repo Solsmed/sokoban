@@ -3,6 +3,7 @@ import java.util.*;
 public class TreeSearcher {
 	private List<GameBoardTree> treeList;
 	private Set<GameBoard> roots;
+	private int ycond=0;
 	//private GameBoard start;
 	
 	public static GameBoardNode currentNode;
@@ -12,7 +13,8 @@ public class TreeSearcher {
 	PriorityQueue<GameBoardNode> bfsQueue;
 	Set<GameBoard> nodeSet;
 	
-	public TreeSearcher() {
+	public TreeSearcher(int ycond) {
+		this.ycond=ycond;
 		//this.start = start;
 		roots = MoveValidator.getPossibleEndBoards(StaticBoard.startBoard.getEndBoard());
 		
@@ -25,7 +27,7 @@ public class TreeSearcher {
 			
 		}
 		
-		Comparator<GameBoardNode> comparator = new GameBoardNodeComparator(); 
+		Comparator<GameBoardNode> comparator = new GameBoardNodeComparator(this.ycond); 
 		bfsQueue = new PriorityQueue<GameBoardNode>(64*1024, comparator);
 	}
 	
@@ -45,8 +47,8 @@ public class TreeSearcher {
 				LinkedList<GameBoardNode> goalPath = new LinkedList<GameBoardNode>();
 				GameBoardNode currentNode = node;
 				while(currentNode != null) {
-					System.out.println(Renderer.draw(currentNode.gameBoard));
-					System.out.println(currentNode.priorMove);
+//					System.out.println(Renderer.draw(currentNode.gameBoard));
+//					System.out.println(currentNode.priorMove);
 					goalPath.add(currentNode);
 					currentNode = currentNode.parent;
 				}
@@ -71,10 +73,10 @@ public class TreeSearcher {
 	}
 	String getPathLOL(LinkedList<GameBoardNode> transitionTables){
 		String path="";
-		System.out.println(StaticBoard.startPosition+" "+transitionTables.peekFirst().gameBoard.playerPosition);
+//		System.out.println(StaticBoard.startPosition+" "+transitionTables.peekFirst().gameBoard.playerPosition);
 		path=path+MoveValidator.findPath(transitionTables.get(0).gameBoard.playerPosition,StaticBoard.startPosition , StaticBoard.startBoard);
-		System.out.println("START PATH "+path);
-		System.out.println("transptable size "+transitionTables.size());
+//		System.out.println("START PATH "+path);
+//		System.out.println("transptable size "+transitionTables.size());
 		for(GameBoardNode node: transitionTables){
 			if(node.priorMove!=null){
 			path=path+boxMove(-node.priorMove.getDirection());
@@ -82,9 +84,9 @@ public class TreeSearcher {
 			}
 			
 		}
-		System.out.println("OUTPUT STRING SIZE "+path.length());
-		System.out.println("Spent time comparing: " + GameBoardNodeComparator.spentTime + " seconds.");
-		System.out.println("Comparisons made: " + GameBoardNodeComparator.counter + ".");
+//		System.out.println("OUTPUT STRING SIZE "+path.length());
+//		System.out.println("Spent time comparing: " + GameBoardNodeComparator.spentTime + " seconds.");
+//		System.out.println("Comparisons made: " + GameBoardNodeComparator.counter + ".");
 		return path;
 	}
 	public String boxMove(int direction){
