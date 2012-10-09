@@ -24,6 +24,7 @@ public class PriorityFIFOQueue<T> implements Queue {
 			return null;
 		Object o = queue.get(0);
 		
+		return o;
 	}
 	
 	@Override

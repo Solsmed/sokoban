@@ -24,7 +24,7 @@ public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
 	}
 	
 	@Override
-    public int compare(GameBoardNode a, GameBoardNode b) {
+    public int compare(GameBoardNode offeredNode, GameBoardNode queuedNode) {
 		long start = System.currentTimeMillis();
 		counter++;
 		
@@ -34,16 +34,16 @@ public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
 		int compareResult = 0;
 		
 		if(!ignoreDepth) {
-			if(a.getDepth() - b.getDepth() < 0)
+			if(offeredNode.getDepth() - queuedNode.getDepth() < 0)
 				return -1;
-			else if(b.getDepth() - a.getDepth() < 0)
+			else if(queuedNode.getDepth() - offeredNode.getDepth() < 0)
 				return 1;
 		}
 		
-		compareResult = xComparator.compare(a, b);
+		compareResult = xComparator.compare(offeredNode, queuedNode);
 		
-		if(compareResult >= 0)
-			compareResult = yComparator.compare(a, b);
+		if(compareResult == 0)
+			compareResult = yComparator.compare(offeredNode, queuedNode);
 		
 		spentTime += (System.currentTimeMillis() - start);
 		
