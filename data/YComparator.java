@@ -5,6 +5,16 @@ public class YComparator implements Comparator<GameBoardNode> {
 
 	private int condition;
 	
+	public final static int NEXTBOXIS_EVERY_BOX = 1;
+	public final static int NEXTBOXIS_EVERY_UNPLACED_BOX = 2;
+	public final static int NEXTBOXIS_LEXICOGRAPHICAL_ORDER = 3;
+	public final static int NEXTBOXIS_LOWEST_MANHATTAN_SUM = 4;
+	public final static int NEXTBOXIS_CLOSEST_BOX = 5;
+	public final static int NEXTBOXIS_RANDOM_BOX = 6;
+	
+	public final static int BOARD_WIDE_UNPLACED_BOXES = 10; 
+	public final static int BOARD_WIDE_MANHATTAN_SUM = 11;
+	
 	public YComparator(int condition) {
 		this.condition = condition;
 	}
@@ -15,26 +25,65 @@ public class YComparator implements Comparator<GameBoardNode> {
 		Double aVal = 0.0;
 		Double bVal = 0.0;		
 
+		
+		
 		switch(condition) {
 			// Every box
-			case 1: 
+			case NEXTBOXIS_EVERY_BOX: 
 				return 0;
 				
+			case NEXTBOXIS_EVERY_UNPLACED_BOX:
+				//for(int box = 0; box < ).getBoxIndex()
+				a.priorMove.getBoxIndex();
+				return 0;
+				
+			// Lexicographical order
+			case NEXTBOXIS_LEXICOGRAPHICAL_ORDER:
+				int aDone = 0;
+				int bDone = 0;
+				 for(int i = 0; i < a.gameBoard.boxPositions.length; i++) {
+		        	if(a.gameBoard.boxPositions[i] == StaticBoard.startBoard.boxPositions[i])
+		        		aDone++;
+		        	if(b.gameBoard.boxPositions[i] == StaticBoard.startBoard.boxPositions[i])
+		        		bDone++;
+		        }
+			        
+				if (aDone > bDone)
+		            return -1;
+
+				if (aDone < bDone)
+		            return 1;
+				
+			// Box closest to target
+			case NEXTBOXIS_LOWEST_MANHATTAN_SUM:
+				return 0;
+				// TODO must know which box is going to be moved, look at GameBoardNode
+				
+			// Random box
+			case NEXTBOXIS_CLOSEST_BOX:
+				return 0;
+
+			// Random box
+			case NEXTBOXIS_RANDOM_BOX:
+				return 0;
+				
+			////////////////////////////////////////////////////////////////////////////////////
+				
 			// Every unplaced box
-			case 2:
+			case BOARD_WIDE_UNPLACED_BOXES:
 				//aVal = getNumPlacedBoxes(a.gameBoard);
 				//bVal = getNumPlacedBoxes(b.gameBoard);
 				
 				keyWord = "placed boxes";
 				aVal = (Double)a.cache.get(keyWord);
 				if(aVal == null) {
-					aVal = getNumPlacedBoxes(a.gameBoard);
+					aVal = getNumUnplacedBoxes(a.gameBoard);
 					a.cache.put(keyWord, aVal);
 				}
 				
 				bVal = (Double)a.cache.get(keyWord);
 				if(bVal == null) {
-					bVal = getNumPlacedBoxes(b.gameBoard);
+					bVal = getNumUnplacedBoxes(b.gameBoard);
 					a.cache.put(keyWord, bVal);
 				}
 				
@@ -45,28 +94,7 @@ public class YComparator implements Comparator<GameBoardNode> {
 		            return 1;
 		        break;
 				
-				
-			// Lexicographical order
-			case 3:
-				
-				int aDone = 0;
-				int bDone = 0;
-				 for(int i = 0; i < a.gameBoard.boxPositions.length; i++) {
-			        	if(a.gameBoard.boxPositions[i] == StaticBoard.startBoard.boxPositions[i])
-			        		aDone++;
-			        	if(b.gameBoard.boxPositions[i] == StaticBoard.startBoard.boxPositions[i])
-			        		bDone++;
-			        }
-			        
-					if (aDone > bDone)
-			        {
-			            return -1;
-			        }
-			        if (aDone < bDone)
-			        {
-			            return 1;
-			        }
-			case 4:
+			case BOARD_WIDE_MANHATTAN_SUM:
 				//aVal = getManhattanSum(a.gameBoard);
 				//bVal = getManhattanSum(b.gameBoard);
 				
@@ -87,24 +115,9 @@ public class YComparator implements Comparator<GameBoardNode> {
 
 		        if (aVal > bVal)
 		            return 1;
-	
-			// Box closest to target
-			case 5:
-				// TODO must know which box is going to be moved, look at GameBoardNode
-				
-			// Random box
-			case 6:
-				int yusd = 1;
-				return 0;
 		}
 
-		if (aVal > bVal)
-            return -1;
-
-        if (aVal < bVal)
-            return 1;
-        
-		return 0;
+     	return 0;
 	}
 
 	private double getManhattanSum(GameBoard board) {
@@ -184,7 +197,7 @@ public class YComparator implements Comparator<GameBoardNode> {
 		return distances;
 	}
 	
-	private double getNumPlacedBoxes(GameBoard board) {
+	private double getNumUnplacedBoxes(GameBoard board) {
 		int done = 0;
 		int numBoxes = board.boxPositions.length;
 		
@@ -195,7 +208,7 @@ public class YComparator implements Comparator<GameBoardNode> {
         	}
         }
         
-        return done;
+        return numBoxes - done;
 	}
 	
 }
