@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class PriorityFIFOQueue<T> implements Queue {
+public class PriorityFIFOQueue<T> implements Queue<T> {
 
 	List<T> queue;
 	Comparator<T> comparator;
@@ -14,15 +14,14 @@ public class PriorityFIFOQueue<T> implements Queue {
 	
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		queue.clear();
 	}
 
 	@Override
-	public Object poll() {
+	public T poll() {
 		if(queue.isEmpty())
 			return null;
-		Object o = queue.get(0);
+		T o = queue.get(0);
 		
 		return o;
 	}
@@ -40,75 +39,79 @@ public class PriorityFIFOQueue<T> implements Queue {
 	
 
 	@Override
-	public boolean add(Object arg0) {
+	public boolean add(T arg0) {
 		int index = 0;
 		outer: for(index = queue.size() - 1; index>=0; index--){
-			int compare = comparator.compare((T) arg0, queue.get(index));
+			int compare = comparator.compare(arg0, queue.get(index));
 			if(compare==0){
 				while(compare==0 && index>=0){
 					index--;
-					compare = comparator.compare((T) arg0, queue.get(index));
+					compare = comparator.compare(arg0, queue.get(index));
 				}
 				break outer;								
 			}
 		}
 		//loop through queue from the end
 			//compare element in queue with argument
-		queue.add(index, (T) arg0);
+		queue.add(index, arg0);
 
 		return false;
 	}
-	
-	
+
 	/*
 	 * 
 	 * NOT USED
 	 * 
-	 */
-	
-	
+	 */	
 	
 	@Override
-	public boolean addAll(Collection arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	@Override
-	public boolean contains(Object arg0) {
+	public boolean addAll(Collection<? extends T> c) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+
 	@Override
-	public boolean containsAll(Collection arg0) {
+	public boolean contains(Object o) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+
 	@Override
-	public Iterator iterator() {
+	public boolean containsAll(Collection<?> c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public Iterator<T> iterator() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+
 	@Override
-	public boolean remove(Object arg0) {
+	public boolean remove(Object o) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+
 	@Override
-	public boolean removeAll(Collection arg0) {
+	public boolean removeAll(Collection<?> c) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+
 	@Override
-	public boolean retainAll(Collection arg0) {
+	public boolean retainAll(Collection<?> c) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 
 	@Override
 	public Object[] toArray() {
@@ -116,33 +119,39 @@ public class PriorityFIFOQueue<T> implements Queue {
 		return null;
 	}
 
+
 	@Override
-	public Object[] toArray(Object[] arg0) {
+	public <T> T[] toArray(T[] a) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+
 	@Override
-	public Object element() {
+	public T element() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+
 	@Override
-	public boolean offer(Object arg0) {
+	public boolean offer(T arg0) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+
 	@Override
-	public Object peek() {
+	public T peek() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+
 	@Override
-	public Object remove() {
+	public T remove() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 }
