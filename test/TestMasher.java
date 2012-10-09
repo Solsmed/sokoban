@@ -5,8 +5,7 @@ import java.util.Vector;
 /**
  * TODO Put here a description of what this class does.
  *
- * @author tim.
- *         Created Sep 6, 2012.
+ * @author Absent Intelligens.
  */
 public class TestMasher extends Thread {
 	String[] arguments;
@@ -34,7 +33,7 @@ public class TestMasher extends Thread {
 		
 		System.out.println("--TESTMASHER--");
 		
-		for(int game = startGame; game < games; game++){
+		for(int game = startGame; game <= games; game++){
 			TestMasher thread = new TestMasher(new String[] {server, port, ""+game }, timeout);
 			allThreads.add(thread);
 		}
@@ -42,7 +41,7 @@ public class TestMasher extends Thread {
 		PrintStream originalOut = System.out; // To get it back later
 		int wins = 0;
 
-		System.out.println("Running " + games + " boards, starting with " + startGame);		
+		System.out.println("Running boards " + startGame + " through " + games);		
 		for(int t = 0; t < allThreads.size(); t++) {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			PrintStream newOut = new PrintStream(baos);
@@ -85,7 +84,6 @@ public class TestMasher extends Thread {
 		System.out.flush();
 
 		System.setOut(originalOut); // So you can print again
-		    System.out.println("\nPlaying against: " + opponent);
 		    System.out.println("Number of solved boards: " + wins + " of " + games + " boards");
 	}
 	
