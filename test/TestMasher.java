@@ -84,7 +84,7 @@ public class TestMasher extends Thread {
 		System.out.flush();
 
 		System.setOut(originalOut); // So you can print again
-		    System.out.println("Number of solved boards: " + wins + " of " + games + " boards");
+		    System.out.println("Number of solved boards: " + wins + " of " + (games - startGame + 1) + " boards");
 	}
 	
 	public TestMasher(String[] args, int timeout) {
