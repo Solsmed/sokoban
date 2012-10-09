@@ -8,6 +8,12 @@ public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
 	static double spentTime = 0;
 	static int counter = 0;
 	
+	boolean ignoreDepth = false;
+	
+	public GameBoardNodeComparator() {
+		ignoreDepth = true; // BFS
+	}
+	
 	public GameBoardNodeComparator(int Ycondition) {
 		this(1, Ycondition);		
 	}
@@ -26,6 +32,13 @@ public class GameBoardNodeComparator implements Comparator<GameBoardNode> {
 		GameBoardNode cn = TreeSearcher.currentNode;
 		
 		int compareResult = 0;
+		
+		if(!ignoreDepth) {
+			if(a.getDepth() - b.getDepth() < 0)
+				return -1;
+			else if(b.getDepth() - a.getDepth() < 0)
+				return 1;
+		}
 		
 		compareResult = xComparator.compare(a, b);
 		
