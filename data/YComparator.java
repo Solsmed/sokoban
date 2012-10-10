@@ -32,7 +32,37 @@ public class YComparator implements Comparator<GameBoardNode> {
 				
 			case NEXTBOXIS_EVERY_UNPLACED_BOX:
 				//for(int box = 0; box < ).getBoxIndex()
-				a.priorMove.getBoxIndex();
+				double aBoxOnStart=nrofPlacedBoxes(a.gameBoard);
+				double bBoxOnStart=nrofPlacedBoxes(b.gameBoard);
+				if (aBoxOnStart > bBoxOnStart)
+		            return -1;
+
+				if (aBoxOnStart < bBoxOnStart)
+		            return 1;
+				else{
+					aVal = (double) manhattan2(a.gameBoard);
+					bVal = (double) manhattan2(b.gameBoard);
+					
+				/*	keyWord = "manhattan sum";
+					aVal = (Double)a.cache.get(keyWord);
+					if(aVal == null) {
+						aVal = getManhattanSum(a.gameBoard);
+						a.cache.put(keyWord, aVal);
+					}
+					
+					bVal = (Double)a.cache.get(keyWord);
+					if(bVal == null) {
+						bVal = getManhattanSum(b.gameBoard);
+						a.cache.put(keyWord, bVal);
+					}*/
+					if (aVal < bVal)
+			            return -1;
+
+			        if (aVal > bVal)
+			            return 1;
+					
+				}
+//				a.priorMove.getBoxIndex();
 				return 0;
 				
 			// Lexicographical order
@@ -270,5 +300,16 @@ public class YComparator implements Comparator<GameBoardNode> {
         
         return numBoxes - done;
 	}
-	
+	private double nrofPlacedBoxes(GameBoard board){
+		int done = 0;
+		int numBoxes = board.boxPositions.length;
+		
+        for(int startBox = 0; startBox < numBoxes; startBox++) {
+        	for(int box = 0; box < numBoxes; box++) {
+        		if(board.boxPositions[box] == StaticBoard.startBoard.boxPositions[startBox])
+        			done++;
+        	}
+        }
+		return done;
+	}
 }

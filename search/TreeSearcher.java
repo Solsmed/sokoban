@@ -24,8 +24,8 @@ public class TreeSearcher {
 			System.out.println("Created a root");
 			
 		}
-		
-		Comparator<GameBoardNode> comparator = new GameBoardNodeComparator(xcond, ycond); 
+		Comparator<GameBoardNode> comparator = new YComparator(ycond);
+//		Comparator<GameBoardNode> comparator = new GameBoardNodeComparator(xcond, ycond); 
 		bfsQueue = new PriorityQueue<GameBoardNode>(64*1024, comparator);
 	}
 	

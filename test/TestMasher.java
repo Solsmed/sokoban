@@ -22,12 +22,14 @@ public class TestMasher extends Thread {
 				
 		int timeout = 1;
 		int yCondition=1;
+		int xCondition=1;
 		String opponent="";
 		try{
 			startGame = Integer.parseInt(args[0]);
 			games = Integer.parseInt(args[1]);
 			timeout = Integer.parseInt(args[2]);
-			yCondition = Integer.parseInt(args[3]);
+			xCondition = Integer.parseInt(args[3]);
+			yCondition = Integer.parseInt(args[4]);
 		}catch(Exception e){
 			System.out.println("invalid use of the tester!");
 			System.out.println("testrunner <number of games> <opponent>");
@@ -36,7 +38,7 @@ public class TestMasher extends Thread {
 		System.out.println("--TESTMASHER--");
 		
 		for(int game = startGame; game <= games; game++){
-			TestMasher thread = new TestMasher(new String[] {server, port, ""+game,""+yCondition }, timeout);
+			TestMasher thread = new TestMasher(new String[] {server, port, ""+game,""+xCondition,""+yCondition }, timeout);
 			allThreads.add(thread);
 		}
 		
