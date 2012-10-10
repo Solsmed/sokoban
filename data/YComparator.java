@@ -36,8 +36,9 @@ public class YComparator implements Comparator<GameBoardNode> {
 				return 0;
 				
 			// Lexicographical order
-			case NEXTBOXIS_LEXICOGRAPHICAL_ORDER:
+			case 3:
 				int aDone = 0;
+//				System.out.println("WEEE");
 				int bDone = 0;
 				 for(int i = 0; i < a.gameBoard.boxPositions.length; i++) {
 		        	if(a.gameBoard.boxPositions[i] == StaticBoard.startBoard.boxPositions[i])
@@ -51,7 +52,29 @@ public class YComparator implements Comparator<GameBoardNode> {
 
 				if (aDone < bDone)
 		            return 1;
-				
+				else{
+					aVal = (double) manhattan2(a.gameBoard);
+					bVal = (double) manhattan2(b.gameBoard);
+					
+				/*	keyWord = "manhattan sum";
+					aVal = (Double)a.cache.get(keyWord);
+					if(aVal == null) {
+						aVal = getManhattanSum(a.gameBoard);
+						a.cache.put(keyWord, aVal);
+					}
+					
+					bVal = (Double)a.cache.get(keyWord);
+					if(bVal == null) {
+						bVal = getManhattanSum(b.gameBoard);
+						a.cache.put(keyWord, bVal);
+					}*/
+					if (aVal < bVal)
+			            return -1;
+
+			        if (aVal > bVal)
+			            return 1;
+					
+				}
 			// Box closest to target
 			case NEXTBOXIS_LOWEST_MANHATTAN_SUM:
 				return 0;
@@ -93,10 +116,10 @@ public class YComparator implements Comparator<GameBoardNode> {
 		        break;
 				
 			case BOARD_WIDE_MANHATTAN_SUM:
-				//aVal = getManhattanSum(a.gameBoard);
-				//bVal = getManhattanSum(b.gameBoard);
+				aVal = (double) manhattan2(a.gameBoard);
+				bVal = (double) manhattan2(b.gameBoard);
 				
-				keyWord = "manhattan sum";
+			/*	keyWord = "manhattan sum";
 				aVal = (Double)a.cache.get(keyWord);
 				if(aVal == null) {
 					aVal = getManhattanSum(a.gameBoard);
@@ -107,12 +130,30 @@ public class YComparator implements Comparator<GameBoardNode> {
 				if(bVal == null) {
 					bVal = getManhattanSum(b.gameBoard);
 					a.cache.put(keyWord, bVal);
-				}
+				}*/
 				if (aVal < bVal)
 		            return -1;
 
 		        if (aVal > bVal)
 		            return 1;
+		        else{
+		        	 aDone = 0;
+//					System.out.println("WEEE");
+					 bDone = 0;
+					 for(int i = 0; i < a.gameBoard.boxPositions.length; i++) {
+			        	if(a.gameBoard.boxPositions[i] == StaticBoard.startBoard.boxPositions[i])
+			        		aDone++;
+			        	if(b.gameBoard.boxPositions[i] == StaticBoard.startBoard.boxPositions[i])
+			        		bDone++;
+			        }
+				        
+					if (aDone > bDone)
+			            return -1;
+
+					if (aDone < bDone)
+			            return 1;
+		        	
+		        }
 		}
 
      	return 0;
@@ -172,6 +213,27 @@ public class YComparator implements Comparator<GameBoardNode> {
 		*/
 		
 		return sum;
+	}
+	public int manhattan2(GameBoard a) {
+		// We'll start with the nearest goal by manhattan distance
+		int h = 0;
+		double[][] manhattanTable = getManhattanDistances(a);
+		int closest;
+		
+		int d;
+		for (int b = 0; b <StaticBoard.startBoard.boxPositions.length; b++) {
+			closest = Integer.MAX_VALUE;
+			for (int bb = 0; bb <StaticBoard.startBoard.boxPositions.length; bb++) {
+				// Calculate manhattan distance
+				d = (int) manhattanTable[b][bb];
+				if (d < closest) {
+					closest = d;
+				}
+			}
+			h += closest;
+		}
+
+		return h;
 	}
 	
 	private double[][] getManhattanDistances(GameBoard board) {
