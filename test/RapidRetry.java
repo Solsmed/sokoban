@@ -1,7 +1,7 @@
 	import java.io.ByteArrayOutputStream;
 	import java.io.PrintStream;
 	import java.util.Vector;
-public class rapidretry {
+public class RapidRetry {
 
 
 	/**
@@ -93,7 +93,7 @@ public class rapidretry {
 			    System.out.println("Number of solved boards: " + wins + " of " + (games) + "tries");
 		}
 		
-		public rapidretry(String[] args, int timeout) {
+		public RapidRetry(String[] args, int timeout) {
 			arguments = args;
 			this.timeout = timeout;
 		}
